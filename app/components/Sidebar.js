@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from './Navbar';
 import Logout from './Logout';
 import { UserCircleIcon } from '@heroicons/react/24/solid'; // Import Heroicon
+import logo from '../../public/logo.png';  
 
 const Sidebar = async ({ session }) => {
     return (
@@ -11,7 +12,7 @@ const Sidebar = async ({ session }) => {
                 {/* Top Part - Logo */}
                 <div>
                     <Image
-                        src="/logo.png"
+                        src={logo}
                         width={120}
                         height={31}
                         alt="Logo"
