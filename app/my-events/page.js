@@ -30,7 +30,7 @@ const TicketCard = () => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
 
-    const backendUrl = "http://localhost:5001";
+    // const backendUrl = "http://localhost:5001";
 
     return (
         <div className='mt-12'>
@@ -49,7 +49,7 @@ const TicketCard = () => {
                         <div className='grid lg:grid-cols-7'>
                             <div className='lg:col-span-2 w-[200px] h-[135px] overflow-hidden rounded-lg'>
                                 <Image
-                                    src={`${backendUrl}/${event.thumbnail}`}
+                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${event.thumbnail}`}
                                     width={500}
                                     height={500}
                                     alt="Event Image"

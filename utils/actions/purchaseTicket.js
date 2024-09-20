@@ -8,7 +8,7 @@ export const purchaseTicket = async ({ eventId, price }) => {
     const session = await getServerSession(authOptions);
 
     try {
-        const response = await axios.post('http://localhost:5001/api/tickets', {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/tickets`, {
             eventId,
             status: "available",  // Hardcoded status
             price  // Pass the actual price

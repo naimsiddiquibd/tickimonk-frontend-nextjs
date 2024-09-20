@@ -9,7 +9,7 @@ export const approveTicket = async (id) => {
 
     try {
         const response = await axios.put(
-            `http://localhost:5001/api/tickets/${id}`,
+            `${process.env.NEXT_PUBLIC_API_URL}/tickets/${id}`,
             { status: 'approved' }, // Payload to update status
             {
                 headers: {

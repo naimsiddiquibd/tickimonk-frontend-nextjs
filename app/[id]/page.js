@@ -95,7 +95,7 @@ const Page = ({ params }) => {
     const formattedStartDateTime = new Date(event.startDateTime).toLocaleString();
     const formattedEndDateTime = new Date(event.endDateTime).toLocaleString();
 
-    const backendUrl = "http://localhost:5001";
+    // const backendUrl = "http://localhost:5001";
 
     return (
         <div className='pt-12'>
@@ -103,7 +103,7 @@ const Page = ({ params }) => {
                 <div>
                     <div className='lg:col-span-2 w-full h-[250px] overflow-hidden rounded-lg'>
                         <Image
-                            src={`${backendUrl}/${event.thumbnail}`}
+                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${event.thumbnail}`}
                             width={500}
                             height={500}
                             alt="Event Image"
@@ -114,7 +114,7 @@ const Page = ({ params }) => {
                         <div className='flex justify-start items-end gap-3'>
                             <div className='lg:col-span-2 w-[120px] h-[120px] overflow-hidden rounded-lg'>
                                 <Image
-                                    src={`${backendUrl}/${event.eventLogo}`}
+                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${event.eventLogo}`}
                                     width={500}
                                     height={500}
                                     alt="Event Image"

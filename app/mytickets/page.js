@@ -54,7 +54,7 @@ const MyTickets = () => {
         return <div>Error fetching tickets: {error}</div>;
     }
 
-    const backendUrl = "http://localhost:5001";
+    // const backendUrl = "http://localhost:5001";
 
     return (
         <div className='mt-12'>
@@ -87,7 +87,7 @@ const MyTickets = () => {
                                             <div className="avatar">
                                                 <div className="mask mask-squircle h-12 w-12">
                                                     <Image
-                                                        src={`${backendUrl}/${ticket?.thumbnail}`}
+                                                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${ticket?.thumbnail}`}
                                                         width={500}
                                                         height={500}
                                                         alt="Event Image"

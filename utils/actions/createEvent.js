@@ -9,7 +9,7 @@ import { getServerSession } from 'next-auth';
 export const createEvent = async (formData) => {
     const session = await getServerSession(authOptions);
     try {
-        const response = await axios.post('http://localhost:5001/api/events/', formData, {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/events/`, formData, {
             headers: {
                 'Authorization': `Bearer ${session?.accessToken}`,
                 'Content-Type': 'multipart/form-data'

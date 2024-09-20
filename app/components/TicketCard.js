@@ -13,7 +13,7 @@ const TicketCard = ({ searchQuery }) => {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await axios.get('http://localhost:5001/api/events');
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/events`);
                 setEvents(response.data);
             } catch (err) {
                 setError('Failed to fetch events.');
@@ -30,7 +30,7 @@ const TicketCard = ({ searchQuery }) => {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
 
-    const backendUrl = "http://localhost:5001";
+    // const backendUrl = "http://localhost:5001";
 
     // Filter events based on search query
     const filteredEvents = events.filter(event =>
@@ -45,7 +45,7 @@ const TicketCard = ({ searchQuery }) => {
                         <div className='grid lg:grid-cols-7'>
                             <div className='lg:col-span-2 w-[200px] h-[135px] overflow-hidden rounded-lg'>
                                 <Image
-                                    src={`${backendUrl}/${event.thumbnail}`}
+                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${event.thumbnail}`}
                                     width={500}
                                     height={500}
                                     alt="Event Image"

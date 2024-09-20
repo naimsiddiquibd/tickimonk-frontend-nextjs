@@ -8,7 +8,7 @@ export const payForTicket = async ({ ticketId }) => {
     const session = await getServerSession(authOptions);
 
     try {
-        const response = await axios.post(`http://localhost:5001/api/tickets/${ticketId}/pay`, {}, {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/tickets/${ticketId}/pay`, {}, {
             headers: {
                 'Authorization': `Bearer ${session?.accessToken}`,
                 'Content-Type': 'application/json',

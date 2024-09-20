@@ -18,7 +18,7 @@ const SidebarRight = () => {
 
             try {
                 // Fetch events data
-                const { data: eventsData } = await axios.get('http://localhost:5001/api/events');
+                const { data: eventsData } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/events`);
                 setEvents(eventsData);
 
                 // Fetch tickets data for the first event (or modify as needed)
@@ -68,7 +68,7 @@ const SidebarRight = () => {
                                 <div className='flex justify-start gap-2 mt-4'>
                                     <div className='lg:col-span-2 w-[70px] h-[50px] overflow-hidden rounded-lg'>
                                         <Image
-                                            src={`${backendUrl}/${event.thumbnail}`}
+                                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${event.thumbnail}`}
                                             width={60}
                                             height={4}
                                             alt={event.eventName}

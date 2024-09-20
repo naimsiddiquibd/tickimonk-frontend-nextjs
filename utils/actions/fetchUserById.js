@@ -8,7 +8,7 @@ export const fetchUserById = async ({ userId }) => {
     const session = await getServerSession(authOptions);
 
     try {
-        const response = await axios.get(`http://localhost:5001/api/users/users/${userId}`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/users/${userId}`, {
             headers: {
                 'Authorization': `Bearer ${session?.accessToken}`,
                 'Content-Type': 'application/json',

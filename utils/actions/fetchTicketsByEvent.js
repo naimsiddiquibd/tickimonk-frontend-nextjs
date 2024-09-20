@@ -10,7 +10,7 @@ export const fetchTicketsByEvent = async ({ id }) => {
     const session = await getServerSession(authOptions);
 
     try {
-        const response = await axios.get(`http://localhost:5001/api/tickets/event/${id}`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/tickets/event/${id}`, {
             headers: {
                 'Authorization': `Bearer ${session?.accessToken}`,
                 'Content-Type': 'application/json',
