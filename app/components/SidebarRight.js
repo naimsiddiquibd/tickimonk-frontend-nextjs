@@ -205,7 +205,7 @@ const SidebarRight = () => {
 
                     {/* Dynamically render the last 3 events */}
                     {events.length > 0 ? (
-                        events.slice(-3).map((event) => (
+                        events.slice(-4).map((event) => (
                             <Link href={`/${event._id}`} key={event._id}>
                                 <div className='flex justify-start gap-2 mt-4'>
                                     <div className='lg:col-span-2 w-[70px] h-[50px] overflow-hidden rounded-lg'>
