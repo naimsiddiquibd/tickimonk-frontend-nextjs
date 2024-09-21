@@ -234,7 +234,9 @@ const SidebarRight = () => {
                     <div>
                         <div className='flex items-center justify-between'>
                             <p className='text-lg font-bold text-gray-500'>Top Organizers</p>
-                            <p className='text-sm font-bold text-[#E61D64]'>See all</p>
+                            <Link href="/under-construction">
+                                <p className='text-sm font-bold text-[#E61D64]'>See all</p>
+                            </Link>
                         </div>
 
                         {[Waythin, Waythin, Waythin].map((src, index) => (
@@ -258,7 +260,9 @@ const SidebarRight = () => {
                 <div>
                     <div className='flex items-center justify-between'>
                         <p className='text-lg font-bold text-gray-500'>Special Offers</p>
-                        <p className='text-sm font-bold text-[#E61D64]'>See all</p>
+                        <Link href="/under-construction">
+                            <p className='text-sm font-bold text-[#E61D64]'>See all</p>
+                        </Link>
                     </div>
                     <div className='flex items-center gap-3 mt-4'>
                         <Image

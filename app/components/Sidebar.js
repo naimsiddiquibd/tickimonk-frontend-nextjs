@@ -3,7 +3,8 @@ import React from 'react';
 import Navbar from './Navbar';
 import Logout from './Logout';
 import { UserCircleIcon } from '@heroicons/react/24/solid'; // Import Heroicon
-import logo from '../../public/logo.png';  
+import logo from '../../public/logo.png';
+import Link from 'next/link';
 
 const Sidebar = async ({ session }) => {
     return (
@@ -26,21 +27,23 @@ const Sidebar = async ({ session }) => {
                 {session?.user ? (
                     <div>
                         <div className='flex items-center justify-start gap-1'>
-                            {session.user.image ? (
-                                <Image
-                                    src={session.user.image}
-                                    width={45}
-                                    height={45}
-                                    alt="Profile"
-                                    className='mx-auto rounded-full'
-                                />
-                            ) : (
-                                <UserCircleIcon className='w-14 h-14 text-gray-500' /> // Display icon if image is missing
-                            )}
-                            <div>
-                                <p className='text-sm font-semibold text-gray-500'>{session.user.name}</p>
-                                <p className='text-xs font-semibold text-gray-500'>{session.user.email}</p>
-                            </div>
+                            <Link href="/under-construction" className='flex justify-start items-center'>
+                                {session.user.image ? (
+                                    <Image
+                                        src={session.user.image}
+                                        width={45}
+                                        height={45}
+                                        alt="Profile"
+                                        className='mx-auto rounded-full'
+                                    />
+                                ) : (
+                                    <UserCircleIcon className='w-14 h-14 text-gray-500' /> // Display icon if image is missing
+                                )}
+                                <div>
+                                    <p className='text-sm font-semibold text-gray-500'>{session.user.name}</p>
+                                    <p className='text-xs font-semibold text-gray-500'>{session.user.email}</p>
+                                </div>
+                            </Link>
                             <Logout></Logout>
                         </div>
                     </div>

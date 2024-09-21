@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import React from 'react';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
+import UnderConstruction from '../components/UnderConstruction';
 
 const page = () => {
     return (
         <div>
             <div className='bg-white p-4 h-[720px] rounded-lg mt-12'>
-                <div className='flex justify-between items-center'>
+                <UnderConstruction></UnderConstruction>
+                {/* <div className='flex justify-between items-center'>
                     <div className='flex justify-start gap-3 items-center'>
                         <div>
                             <UserCircleIcon className='w-20 h-20 text-gray-500' />
@@ -108,7 +110,7 @@ const page = () => {
                             className="input outline-none focus:no-underline w-full h-32 pt-3 bg-[#eeeaea]"
                         />
                     </label>
-                </form>
+                </form> */}
             </div>
         </div>
     );
