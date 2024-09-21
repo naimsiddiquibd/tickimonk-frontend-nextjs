@@ -123,6 +123,7 @@ const Page = ({ params }) => {
                         dateTime={formattedStartDateTime}
                         customerName={ticketUserName}
                         ticketPrice={event?.price}
+                        ticketStatus={ticket?.status}
                     />
                 </div>
 

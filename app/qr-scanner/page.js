@@ -108,6 +108,7 @@ const QRCodeScanner = () => {
                             dateTime={formattedStartDateTime}
                             customerName={organizerName}
                             ticketPrice={ticketData?.price}
+                            ticketStatus={ticketData?.status}
                         />
                         <div className='mt-4'>
                             <button

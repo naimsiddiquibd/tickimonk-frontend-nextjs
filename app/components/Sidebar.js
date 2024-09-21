@@ -12,12 +12,14 @@ const Sidebar = async ({ session }) => {
             <div className='h-full grid grid-cols-1 gap-4 content-between'>
                 {/* Top Part - Logo */}
                 <div>
-                    <Image
-                        src={logo}
-                        width={120}
-                        height={31}
-                        alt="Logo"
-                    />
+                    <Link href="/">
+                        <Image
+                            src={logo}
+                            width={120}
+                            height={31}
+                            alt="Logo"
+                        />
+                    </Link>
                 </div>
 
                 {/* Middle Part - Navigation */}
