@@ -8,8 +8,8 @@ import Link from 'next/link';
 
 const Sidebar = async ({ session }) => {
     return (
-        <div className='lg:flex justify-between items-center h-screen py-12'>
-            <div className='h-full grid grid-cols-1 gap-4 content-between'>
+        <div className='lg:flex justify-between items-center h-screen py-12 w-full'>
+            <div className='h-full grid grid-cols-1 gap-4 content-between w-full'>
                 {/* Top Part - Logo */}
                 <div>
                     <Link href="/">
@@ -28,7 +28,7 @@ const Sidebar = async ({ session }) => {
                 {/* Bottom Part - Profile */}
                 {session?.user ? (
                     <div>
-                        <div className='flex items-center justify-start gap-1'>
+                        <div className='flex items-center justify-between gap-1'>
                             <Link href="/under-construction" className='flex justify-start items-center'>
                                 {session.user.image ? (
                                     <Image
@@ -46,7 +46,9 @@ const Sidebar = async ({ session }) => {
                                     <p className='text-xs font-semibold text-gray-500'>{session.user.email}</p>
                                 </div>
                             </Link>
-                            <Logout></Logout>
+                            <div className='mr-4'>
+                                <Logout></Logout>
+                            </div>
                         </div>
                     </div>
                 ) : (
