@@ -19,7 +19,7 @@ const nextConfig = {
       remotePatterns: [
         {
           protocol: "https",
-          hostname: "ticketing-system-backend-eq4izhvg6-naimsiddiqui.vercel.app",
+          hostname: "ticketing-system-backend-flzy6x0ku-naimsiddiqui.vercel.app",
           pathname: '/uploads/**'
         },
       ],
