@@ -20,7 +20,8 @@
     "react-dom": "^18",
     "react-hook-form": "^7.52.2",
     "react-qr-code": "^2.0.15",
-    "react-qr-scanner": "^1.0.0-alpha.11"
+    "react-qr-scanner": "^1.0.0-alpha.11",
+    "react-share": "^5.1.0"
   },
   "devDependencies": {
     "daisyui": "^4.12.2",
