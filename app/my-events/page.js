@@ -60,7 +60,7 @@ const TicketCard = () => {
                 return (
                     <div key={event._id} className='bg-white shadow-sm p-4 rounded-xl mb-5 mt-3 cursor-pointer'>
                         <div className='grid lg:flex lg:justify-between lg:items-center'>
-                            <Link href={`/${event._id}`}>
+                            <Link href={`my-events/${event._id}`}>
                                 <div className='lg:flex justify-start gap-5'>
                                     <div className='lg:col-span-2 w-[200px] h-[135px] overflow-hidden rounded-lg'>
                                         <Image
@@ -138,8 +138,8 @@ const TicketCard = () => {
                                             </ul>
                                         </div>
                                     </div>
-                                    <Link href={`/${event._id}`}>
-                                        <p className='text-[12px] bg-[#E61D64] btn border-0 rounded-md text-white font-medium px-3 min-h-9 h-9 hover:bg-[#ba4870] '>Get Ticket</p>
+                                    <Link href={`my-events/${event._id}`}>
+                                        <p className='text-[12px] bg-[#E61D64] btn border-0 rounded-md text-white font-medium px-3 min-h-9 h-9 hover:bg-[#ba4870] '>View Event</p>
                                     </Link>
                                 </div>
                                 <div className='grid justify-items-end'>
