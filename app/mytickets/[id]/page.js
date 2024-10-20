@@ -90,104 +90,121 @@ const Page = ({ params }) => {
     };
 
     if (loading) {
-        return <p>Loading...</p>;
+        return (
+            <div className="flex justify-center items-center h-screen bg-slate-100">
+                <p>Loading...</p>
+            </div>
+        );
     }
 
     if (error) {
-        return <p>Error: {error}</p>;
+        return (
+            <div className="flex justify-center items-center h-screen bg-slate-100">
+                <p>Error: {error}</p>
+            </div>
+        );
     }
 
     if (!event) {
-        return <p>No event found.</p>;
+        return (
+            <div className="flex justify-center items-center h-screen bg-slate-100">
+                <p>No event found!</p>
+            </div>
+        );
     }
 
     const formattedStartDateTime = new Date(event?.startDateTime).toLocaleString();
     const formattedEndDateTime = new Date(event?.endDateTime).toLocaleString();
 
     return (
-        <div className='pt-12'>
-            <div className='flex justify-start items-center gap-2 mb-5'>
-                <div className="breadcrumbs text-sm text-gray-400">
-                    <ul>
-                        <li><a>Home</a></li>
-                        <li><a>My Tickets</a></li>
-                        <li><a>{event?.eventName}</a></li>
-                    </ul>
+        <div className="w-full flex justify-center">
+            <div className='pt-28 pb-16 lg:mx-28 mx-5 2xl:mx-96'>
+                <div className='flex justify-start items-center gap-2 mb-5'>
+                    <div className="breadcrumbs text-sm text-gray-400">
+                        <ul>
+                            <li><a>Home</a></li>
+                            <li><a>My Tickets</a></li>
+                            <li><a>{event?.eventName}</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div className='grid grid-cols-2 gap-2'>
-            <div ref={ticketRef}>
-                    <Ticket
-                        ticketId={id}
-                        showName={event?.eventName}
-                        dateTime={formattedStartDateTime}
-                        customerName={ticketUserName}
-                        ticketPrice={event?.price}
-                        ticketStatus={ticket?.status}
-                    />
-                </div>
-
-                <div className='flex justify-start items-start gap-4'>
-                    <div className="divider divider-horizontal ml-3 mr-3 "></div>
-                    <div>
-                        <div>
-                            <h5 className='font-semibold text-gray-500 text-sm'>Event Name</h5>
-                            <p className='font-semibold text-gray-500 text-[10px]'>{event?.eventName}</p>
-                        </div>
-                        <div className='mt-2'>
-                            <h5 className='font-semibold text-gray-500 text-sm'>Location</h5>
-                            <p className='font-semibold text-gray-500 text-[10px]'>{event?.venue}</p>
-                        </div>
-                        <div className='mt-2'>
-                            <h5 className='font-semibold text-gray-500 text-sm'>Organizer</h5>
-                            <p className='font-semibold text-gray-500 text-[10px]'>{organizerName}</p>
-                        </div>
-                        <div className='mt-2'>
-                            <h5 className='font-semibold text-gray-500 text-sm'>Event Category</h5>
-                            <p className='font-semibold text-gray-500 text-[10px]'>{event?.eventCategory}</p>
-                        </div>
-                        <div className='mt-2'>
-                            <h5 className='font-semibold text-gray-500 text-sm'>Start Date & Time</h5>
-                            <p className='font-semibold text-gray-500 text-[10px]'>{formattedStartDateTime}</p>
-                        </div>
-                        <div className='mt-2'>
-                            <h5 className='font-semibold text-gray-500 text-sm'>End Date & Time</h5>
-                            <p className='font-semibold text-gray-500 text-[10px]'>{formattedEndDateTime}</p>
-                        </div>
-                        <div className='mt-2'>
-                            <h5 className='font-semibold text-gray-500 text-sm'>Time Zone</h5>
-                            <p className='font-semibold text-gray-500 text-[10px]'>{event?.timezone}</p>
-                        </div>
-                        <div className='mt-2'>
-                            <h5 className='font-semibold text-gray-500 text-sm'>Recurring Event</h5>
-                            <p className='font-semibold text-gray-500 text-[10px]'>
-                                {event?.recurringEvent ? "Yes" : "No"}
-                            </p>
-                        </div>
-                        <div className='mt-2'>
-                            <h5 className='font-semibold text-gray-500 text-sm'>Age Restrictions</h5>
-                            <p className='font-semibold text-gray-500 text-[10px]'>{event?.ageRestriction}</p>
-                        </div>
-                        <div className='mt-2'>
-                            <h5 className='font-semibold text-gray-500 text-sm'>Dress Code</h5>
-                            <p className='font-semibold text-gray-500 text-[10px]'>{event?.dressCode}</p>
-                        </div>
-                        <div className='mt-12'>
-                            <div  onClick={handleDownload} className='text-[16px] bg-[#E61D64] btn border-0 rounded-full text-white font-medium px-12 hover:bg-[#ba4870]'>
-                                Download now
+                <div className='grid grid-cols-1 lg:grid-cols-2 gap-2 max-w-3xl'>
+                    <div ref={ticketRef}>
+                        <Ticket
+                            ticketId={id}
+                            showName={event?.eventName}
+                            dateTime={formattedStartDateTime}
+                            customerName={ticketUserName}
+                            ticketPrice={event?.price}
+                            ticketStatus={ticket?.status}
+                        />
+                        <div className='mt-5'>
+                            <div onClick={handleDownload} className='text-[16px] bg-[#E61D64] btn border-0 rounded-md text-white font-medium px-12 w-full lg:w-96 hover:bg-[#ba4870]'>
+                                Download Now
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div className='mt-5'>
-                <div>
-                    <h5 className='font-semibold text-gray-500 text-sm'>Event Description</h5>
-                    <p className='font-semibold text-gray-500 text-[12px]'>{event?.description}</p>
-                </div>
-                <div className='mt-2'>
-                    <h5 className='font-semibold text-gray-500 text-sm'>Organizer Contact Information & Special Instructions</h5>
-                    <p className='font-semibold text-gray-500 text-[12px]'>{event?.specialInstructions}</p>
+
+                    <div className='flex justify-start items-start gap-4'>
+                        <div className="divider divider-horizontal ml-3 mr-3 hidden lg:block"></div>
+                        <div className="mt-3">
+                            <div>
+                                <h5 className='font-semibold text-gray-500 text-sm'>Event Name</h5>
+                                <p className='font-semibold text-gray-500 text-[10px]'>{event?.eventName}</p>
+                            </div>
+                            <div className='mt-2'>
+                                <h5 className='font-semibold text-gray-500 text-sm'>Location</h5>
+                                <p className='font-semibold text-gray-500 text-[10px]'>{event?.venue}</p>
+                            </div>
+                            <div className='mt-2'>
+                                <h5 className='font-semibold text-gray-500 text-sm'>Organizer</h5>
+                                <p className='font-semibold text-gray-500 text-[10px]'>{organizerName}</p>
+                            </div>
+                            <div className='mt-2'>
+                                <h5 className='font-semibold text-gray-500 text-sm'>Event Category</h5>
+                                <p className='font-semibold text-gray-500 text-[10px]'>{event?.eventCategory}</p>
+                            </div>
+                            <div className='mt-2'>
+                                <h5 className='font-semibold text-gray-500 text-sm'>Start Date & Time</h5>
+                                <p className='font-semibold text-gray-500 text-[10px]'>{formattedStartDateTime}</p>
+                            </div>
+                            <div className='mt-2'>
+                                <h5 className='font-semibold text-gray-500 text-sm'>End Date & Time</h5>
+                                <p className='font-semibold text-gray-500 text-[10px]'>{formattedEndDateTime}</p>
+                            </div>
+                            <div className='mt-2'>
+                                <h5 className='font-semibold text-gray-500 text-sm'>Time Zone</h5>
+                                <p className='font-semibold text-gray-500 text-[10px]'>{event?.timezone}</p>
+                            </div>
+                            <div className='mt-2'>
+                                <h5 className='font-semibold text-gray-500 text-sm'>Recurring Event</h5>
+                                <p className='font-semibold text-gray-500 text-[10px]'>
+                                    {event?.recurringEvent ? "Yes" : "No"}
+                                </p>
+                            </div>
+                            <div className='mt-2'>
+                                <h5 className='font-semibold text-gray-500 text-sm'>Age Restrictions</h5>
+                                <p className='font-semibold text-gray-500 text-[10px]'>{event?.ageRestriction}</p>
+                            </div>
+                            <div className='mt-2'>
+                                <h5 className='font-semibold text-gray-500 text-sm'>Dress Code</h5>
+                                <p className='font-semibold text-gray-500 text-[10px]'>{event?.dressCode}</p>
+                            </div>
+                            <div className='mt-5'>
+                                <div>
+                                    <h5 className='font-semibold text-gray-500 text-sm'>Event Description</h5>
+                                    <p className='font-semibold text-gray-500 text-[12px]'>{event?.description}</p>
+                                </div>
+                                <div className='mt-2'>
+                                    <h5 className='font-semibold text-gray-500 text-sm'>Organizer Contact Information & Special Instructions</h5>
+                                    <p className='font-semibold text-gray-500 text-[12px]'>{event?.specialInstructions}</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
         </div>

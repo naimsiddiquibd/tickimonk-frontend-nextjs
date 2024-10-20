@@ -111,7 +111,7 @@ const Ticket = ({ ticketId, showName, dateTime, customerName, ticketPrice, ticke
     };
 
     return (
-        <div className='bg-white px-5 pt-5 pb-2 rounded-lg shadow-sm relative'>
+        <div className='bg-white px-5 pt-5 pb-2 rounded-lg shadow-sm relative w-full lg:w-96'>
             <div>
                 <div className='flex justify-between items-center'>
                     <div className='w-20 h-full'>

@@ -38,7 +38,11 @@ const TicketsByEvents = ({ id, setTickets, tickets }) => {
     }, [id, setTickets]);
 
     if (loading) {
-        return <div>Loading tickets...</div>;
+        return (
+            <div className="flex justify-center items-center h-screen bg-slate-100">
+                <p>Loading...</p>
+            </div>
+        );
     }
 
     if (error) {

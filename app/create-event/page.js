@@ -103,63 +103,73 @@ const EventForm = () => {
   const handlePrev = () => setCurrentStep((prevStep) => prevStep - 1);
 
   return (
-    <div className="max-w-4xl mx-auto p-8 bg-white shadow-sm rounded-md mt-12 w-[500px]">
-      <p className="text-center font-bold text-gray-500">Create Event</p>
-      <p className="text-center text-xs font-semibold text-gray-400 mt-3 mb-4">
-        Follow the steps to create your event.
-      </p>
-      {message.text && (
-        <div
-          className={`mt-4 text-center ${message.type === "success" ? "text-green-500" : "text-red-500"
-            }`}
-        >
-          {message.text}
+    <div className="pt-28 lg:mx-28 mx-5 2xl:mx-96 pb-16 lg:h-screen h-full">
+      <div className='flex justify-start items-center gap-2'>
+        <div className="breadcrumbs text-sm text-gray-400">
+          <ul>
+            <li><a>Home</a></li>
+            <li><a>My Tickets</a></li>
+          </ul>
         </div>
-      )}
-
-      {currentStep === 1 && (
-        <EventDetailsStep formData={formData} handleChange={handleChange} />
-      )}
-      {currentStep === 2 && (
-        <EventScheduleStep formData={formData} handleChange={handleChange} />
-      )}
-      {currentStep === 3 && (
-        <EventSettingsStep formData={formData} handleChange={handleChange} />
-      )}
-      {currentStep === 4 && (
-        <EventDescriptionStep formData={formData} handleChange={handleChange} />
-      )}
-      {currentStep === 5 && (
-        <EventMediaStep formData={formData} handleChange={handleChange} />
-      )}
-
-      <div className="flex justify-end mt-6 gap-3">
-        {currentStep > 1 && (
-          <button
-            type="button"
-            onClick={handlePrev}
-            className="bg-gray-300 text-gray-900 px-12 py-3 rounded-full"
+      </div>
+      <div className="max-w-4xl mx-auto p-8 shadow-sm rounded-md lg:w-[500px] w-full bg-white">
+        <p className="text-center font-bold text-gray-500">Create Event</p>
+        <p className="text-center text-xs font-semibold text-gray-400 mt-3 mb-4">
+          Follow the steps to create your event.
+        </p>
+        {message.text && (
+          <div
+            className={`mt-4 text-center ${message.type === "success" ? "text-green-500" : "text-red-500"
+              }`}
           >
-            Previous
-          </button>
+            {message.text}
+          </div>
         )}
-        {currentStep < 5 ? (
-          <button
-            type="button"
-            onClick={handleNext}
-            className="bg-[#E61D64] text-white px-12 py-3 rounded-full"
-          >
-            Next
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={handleSubmit}
-            className="bg-[#E61D64] text-white px-12 py-3 rounded-full"
-          >
-            Submit
-          </button>
+
+        {currentStep === 1 && (
+          <EventDetailsStep formData={formData} handleChange={handleChange} />
         )}
+        {currentStep === 2 && (
+          <EventScheduleStep formData={formData} handleChange={handleChange} />
+        )}
+        {currentStep === 3 && (
+          <EventSettingsStep formData={formData} handleChange={handleChange} />
+        )}
+        {currentStep === 4 && (
+          <EventDescriptionStep formData={formData} handleChange={handleChange} />
+        )}
+        {currentStep === 5 && (
+          <EventMediaStep formData={formData} handleChange={handleChange} />
+        )}
+
+        <div className="flex justify-end mt-6 gap-3">
+          {currentStep > 1 && (
+            <button
+              type="button"
+              onClick={handlePrev}
+              className="bg-gray-300 text-gray-900 px-12 py-3 rounded-sm"
+            >
+              Previous
+            </button>
+          )}
+          {currentStep < 5 ? (
+            <button
+              type="button"
+              onClick={handleNext}
+              className="bg-[#E61D64] text-white px-12 py-3 rounded-sm"
+            >
+              Next
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="bg-[#E61D64] text-white px-12 py-3 rounded-sm"
+            >
+              Submit
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

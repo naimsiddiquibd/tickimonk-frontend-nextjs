@@ -29,11 +29,11 @@ console.log("eita result from login page:", result);
     };
 
     return (
-        <div className='mt-12'>
+        <div className='h-full lg:h-screen lg:pt-28 pt-24 pb-10  mx-5'>
             <div className='flex justify-center items-center'>
                 <div className='w-[500px] bg-white p-7 rounded-lg'>
-                    <p className='text-center font-bold text-gray-500'>Login</p>
-                    <p className='text-center text-xs font-semibold text-gray-400 mt-3 mb-4'>
+                    <p className='text-center font-bold text-gray-800'>Login</p>
+                    <p className='text-center text-xs font-semibold text-gray-800 mt-3 mb-4'>
                         Welcome to the Ticketing System! Log in to purchase tickets or create and manage events with ease. Sign in to get started!
                     </p>
 
@@ -43,12 +43,12 @@ console.log("eita result from login page:", result);
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <label className="form-control w-full max-w-xl">
                             <div className="label">
-                                <span className="label-text">Email</span>
+                                <span className="label-text text-gray-800">Email</span>
                             </div>
                             <input 
                                 type="text" 
                                 placeholder="Type here" 
-                                className="input outline-none focus:no-underline w-full max-w-xl bg-[#eeeaea]" 
+                                className="input outline-none focus:no-underline w-full text-gray-600 max-w-xl bg-slate-100" 
                                 {...register('email', { required: true })}
                             />
                             {errors.email && <span className="text-red-500">This field is required</span>}
@@ -56,12 +56,12 @@ console.log("eita result from login page:", result);
 
                         <label className="form-control w-full max-w-xl">
                             <div className="label">
-                                <span className="label-text">Password</span>
+                                <span className="label-text text-gray-800">Password</span>
                             </div>
                             <input 
                                 type="password" 
                                 placeholder="Type here" 
-                                className="input outline-none focus:no-underline w-full max-w-xl bg-[#eeeaea]" 
+                                className="input outline-none focus:no-underline text-gray-600 w-full max-w-xl bg-slate-100" 
                                 {...register('password', { required: true })}
                             />
                             {errors.password && <span className="text-red-500">This field is required</span>}
@@ -71,13 +71,13 @@ console.log("eita result from login page:", result);
                             <div className="form-control">
                                 <label className="label cursor-pointer justify-start gap-3">
                                     <input type="checkbox" defaultChecked className="checkbox" />
-                                    <p className="label-text text-sm">Agree to the <span className='text-[#E61D64]'>Terms and Conditions</span></p>
+                                    <p className="label-text text-sm">Agree to the <Link href="terms-condition" className='text-[#E61D64]'>Terms and Conditions</Link></p>
                                 </label>
                             </div>
                         </div>
 
                         <div className='mt-10'>
-                            <button type="submit" className='text-[16px] bg-[#E61D64] btn border-0 rounded-full text-white font-medium px-12 w-full hover:bg-[#ba4870]'>
+                            <button type="submit" className='text-[16px] bg-[#E61D64] btn border-0 rounded-md text-white font-medium px-12 w-full hover:bg-[#ba4870]'>
                                 Login
                             </button>
                         </div>
@@ -96,10 +96,10 @@ console.log("eita result from login page:", result);
                     </button> */}
 
                     <Link href="forget-password">
-                        <p className='text-center text-xs font-semibold text-gray-500 mt-4 hover:text-[#E61D64]'>Forgot Password?</p>
+                        <p className='text-center text-xs font-semibold text-gray-800 mt-4 hover:text-[#E61D64]'>Forgot Password?</p>
                     </Link>
 
-                    <p className='text-center text-xs font-semibold text-gray-500 mt-8'>
+                    <p className='text-center text-xs font-semibold text-gray-800 mt-8'>
                         Don’t have an account yet? Please
                         <Link href="signup">
                             <span className='text-[#E61D64]'> Signup</span>
