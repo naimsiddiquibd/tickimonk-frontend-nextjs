@@ -69,6 +69,25 @@ const Page = ({ params }) => {
             alert('Event not found');
             return;
         }
+
+        // Gather additional required data
+        const paymentData = {
+            amount: event.price, // Assuming `event.price` contains the price of the ticket
+            currency: "BDT",
+            product_name: event.eventName, // Use the event name
+            product_description: event.description, // Use the event description
+            name: "John Doe", // Replace with dynamic value if available
+            email: "john.doe@example.com", // Replace with dynamic value if available
+            phone: "01712345678", // Replace with dynamic value if available
+            address: "123 Test Street", // Replace with dynamic value if available
+            city: "Dhaka", // Replace with dynamic value if available
+            state: "Dhaka", // Replace with dynamic value if available
+            zipcode: "1000", // Replace with dynamic value if available
+            country: "BD", // Replace with dynamic value if available
+            redirect_url: "https://tickimonk.vercel.app/mytickets", // Replace with your redirect URL
+            ipn_url: "https://tickimonk.vercel.app" // Replace with your IPN URL
+        };
+
         try {
             const purchaseResult = await purchaseTicket({ eventId: id, price: event.price });
 
@@ -76,12 +95,12 @@ const Page = ({ params }) => {
                 const ticketId = purchaseResult.data._id;
 
                 // After successful ticket creation, initiate payment
-                const paymentResult = await payForTicket({ ticketId });
-
+                const paymentResult = await payForTicket({ ticketId, paymentData });
+                console.log("reeeee:", paymentResult);
                 if (paymentResult.success) {
-                    // Redirect to bkash payment URL
-                    const bkashURL = paymentResult.data.bkashURL;
-                    window.location.href = bkashURL;
+                    // Redirect to the payment URL from the response if available
+                    const paymentUrl = paymentResult.data.data.action.url; // Adjust this line based on your API response
+                    window.location.href = paymentUrl;
                 } else {
                     alert('Failed to initiate payment.');
                 }
@@ -93,6 +112,7 @@ const Page = ({ params }) => {
             alert('An error occurred while purchasing the ticket.');
         }
     };
+
 
     if (loading) {
         return (
@@ -128,204 +148,23 @@ const Page = ({ params }) => {
 
     const formatDateTime = (startDateTime) => {
         const date = new Date(startDateTime);
-      
+
         const formattedDate = date.toLocaleDateString("en-US", {
-          weekday: "short",
-          month: "short",
-          day: "numeric",
+            weekday: "short",
+            month: "short",
+            day: "numeric",
         });
-      
+
         const startTime = date.toLocaleTimeString("en-US", {
-          hour: "numeric",
-          hour12: true,
+            hour: "numeric",
+            hour12: true,
         });
-      
+
         return `${formattedDate} | ${startTime}`;
-      };
+    };
 
     return (
-        // <>
-        //     <Head>
-        //         <title>{event ? event.eventName : 'Event Page'}</title>
-        //         <meta property="og:type" content="website" />
-        //         <meta property="og:title" content={event ? event.eventName : 'Event Title'} />
-        //         <meta
-        //             property="og:description"
-        //             content={event ? event.description : 'Event description will be displayed here.'}
-        //         />
-        //         <meta property="og:url" content={generateEventUrl()} />
-        //         <meta
-        //             property="og:image"
-        //             content={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${event?.thumbnail}`}
-        //         />
-        //         <meta property="og:image:alt" content="Event Thumbnail" />
-        //         <meta property="og:site_name" content="Your Site Name" />
-        //         <meta name="twitter:card" content="summary_large_image" />
-        //         <meta name="twitter:title" content={event ? event.eventName : 'Event Title'} />
-        //         <meta
-        //             name="twitter:description"
-        //             content={event ? event.description : 'Event description will be displayed here.'}
-        //         />
-        //         <meta
-        //             name="twitter:image"
-        //             content={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${event?.thumbnail || 'default-thumbnail.jpg'}`}
-        //         />
-        //     </Head>
-        //     <div className='pt-12'>
-        //         <div className='mb-10'>
-        //             <div>
-        //                 <div className='lg:col-span-2 w-full h-[250px] overflow-hidden rounded-lg'>
-        //                     <Image
-        //                         src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${event.thumbnail}`}
-        //                         width={500}
-        //                         height={500}
-        //                         alt="Event Image"
-        //                         className="object-cover w-full h-full"
-        //                     />
-        //                 </div>
-        //                 <div className='-mt-10 ml-6 flex justify-between items-center'>
-        //                     <div className='flex justify-start items-end gap-3'>
-        //                         <div className='lg:col-span-2 w-[120px] h-[120px] overflow-hidden rounded-lg'>
-        //                             <Image
-        //                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${event.eventLogo}`}
-        //                                 width={500}
-        //                                 height={500}
-        //                                 alt="Event Image"
-        //                                 className="object-cover w-full h-full"
-        //                             />
-        //                         </div>
-        //                         <div>
-        //                             <h2 className='text-2xl font-semibold text-gray-600'>{event.eventName}</h2>
-        //                             <p>By {organizerName}</p>
-        //                         </div>
-        //                     </div>
-        //                     <div>
-        //                         <div className='mt-12 ml-14'>
-        //                             <div onClick={handlePurchase} className=' mr-2 text-[12px] bg-[#E61D64] btn border-0 rounded-full text-white font-medium px-6 h-1 min-h-10 hover:bg-[#ba4870]'>
-        //                                 Purchase now
-        //                             </div>
-        //                             {/* <Link href="/create-event" className='text-[12px] bg-[#5f5e5f] btn border-0 rounded-full text-white font-medium px-6 h-1 min-h-10 hover:bg-[#838183]'>
-        //                             Contact support
-        //                         </Link> */}
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //         <div className='bg-white p-5 rounded-lg'>
-        //             <h3 className='font-bold text-gray-500 text-md'>Event details</h3>
-        //             <div className="divider"></div>
-        //             <div className='grid grid-cols-2 gap-3 '>
 
-        //                 <div className=''>
-        //                     <div className='flex items-center gap-3 border-2 border-gray-200 p-3 rounded-lg mb-3'>
-        //                         <div className='bg-green-200 p-3 rounded-full'>
-        //                             <RocketLaunchIcon className='w-7 h-7 text-gray-500' />
-        //                         </div>
-        //                         <div>
-        //                             <h5 className='font-normal text-sm text-gray-700'>Number of people are going</h5>
-        //                             <p className='font-semibold text-sm text-gray-700'>{tickets?.length} persons</p>
-        //                         </div>
-        //                     </div>
-        //                     <div className='flex items-center gap-3 border-2 border-gray-200 p-3 rounded-lg mb-3'>
-        //                         <div className='bg-sky-200 p-3 rounded-full'>
-        //                             <MapPinIcon className='w-7 h-7 text-gray-500' />
-        //                         </div>
-        //                         <div>
-        //                             <h5 className='font-normal text-sm text-gray-700'>Event location & venue</h5>
-        //                             <p className='font-semibold text-sm text-gray-700'>{event.venue}</p>
-        //                         </div>
-        //                     </div>
-        //                     <div className='flex items-center gap-3 border-2 border-gray-200 p-3 rounded-lg mb-3'>
-        //                         <div className='bg-pink-200 p-3 rounded-full'>
-        //                             <ClockIcon className='w-7 h-7 text-gray-500' />
-        //                         </div>
-        //                         <div>
-        //                             <h5 className='font-normal text-sm text-gray-700'>Event Start Time</h5>
-        //                             <p className='font-semibold text-sm text-gray-700'>{formattedStartDateTime}</p>
-        //                         </div>
-        //                     </div>
-        //                     <div className='flex items-center gap-3 border-2 border-gray-200 p-3 rounded-lg mb-3'>
-        //                         <div className='bg-red-200 p-3 rounded-full'>
-        //                             <ExclamationCircleIcon className='w-7 h-7 text-gray-500' />
-        //                         </div>
-        //                         <div>
-        //                             <h5 className='font-normal text-sm text-gray-700'>Event End Time</h5>
-        //                             <p className='font-semibold text-sm text-gray-700'>{formattedEndDateTime}</p>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-
-        //                 <div className='flex justify-start items-start'>
-        //                     {/* <div className="divider divider-horizontal ml-4 mr-4 "></div> */}
-        //                     <div className='w-full'>
-
-        //                         <div className='w-full flex items-center gap-3 border-2 border-gray-200 p-3 rounded-lg mb-3'>
-        //                             <div className='bg-lime-200 p-3 rounded-full'>
-        //                                 <TagIcon className='w-7 h-7 text-gray-500' />
-        //                             </div>
-        //                             <div>
-        //                                 <h5 className='font-normal text-sm text-gray-700'>Event Category</h5>
-        //                                 <p className='font-semibold text-sm text-gray-700'>{event.eventCategory}</p>
-        //                             </div>
-        //                         </div>
-        //                         <div className='w-full flex items-center gap-3 border-2 border-gray-200 p-3 rounded-lg mb-3'>
-        //                             <div className='bg-cyan-200 p-3 rounded-full'>
-        //                                 <MapIcon className='w-7 h-7 text-gray-500' />
-        //                             </div>
-        //                             <div>
-        //                                 <h5 className='font-normal text-sm text-gray-700'>Time Zone</h5>
-        //                                 <p className='font-semibold text-sm text-gray-700'>{event.timezone}</p>
-        //                             </div>
-        //                         </div>
-        //                         {/* <div className='w-full flex items-center gap-3 border-2 border-gray-200 p-3 rounded-lg mb-2'>
-        //                     <div className='bg-red-200 p-3 rounded-full'>
-        //                         <ExclamationCircleIcon className='w-7 h-7 text-gray-500' />
-        //                     </div>
-        //                     <div>
-        //                         <h5 className='font-normal text-sm text-gray-700'>Recurring Event</h5>
-        //                         <p className='font-semibold text-gray-500 text-[10px]'>
-        //                             {event.recurringEvent ? "Yes" : "No"}
-        //                         </p>
-        //                     </div>
-        //                 </div> */}
-        //                         <div className='w-full flex items-center gap-3 border-2 border-gray-200 p-3 rounded-lg mb-3'>
-        //                             <div className='bg-indigo-200 p-3 rounded-full'>
-        //                                 <NoSymbolIcon className='w-7 h-7 text-gray-500' />
-        //                             </div>
-        //                             <div>
-        //                                 <h5 className='font-normal text-sm text-gray-700'>Age Restrictions</h5>
-        //                                 <p className='font-semibold text-sm text-gray-700'>{event.ageRestriction}</p>
-        //                             </div>
-        //                         </div>
-        //                         <div className='w-full flex items-center gap-3 border-2 border-gray-200 p-3 rounded-lg mb-3'>
-        //                             <div className='bg-purple-200 p-3 rounded-full'>
-        //                                 <PuzzlePieceIcon className='w-7 h-7 text-gray-500' />
-        //                             </div>
-        //                             <div>
-        //                                 <h5 className='font-normal text-sm text-gray-700'>Dress Code</h5>
-        //                                 <p className='font-semibold text-sm text-gray-700'>{event.dressCode}</p>
-        //                             </div>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //         <div className='my-5 bg-white p-4 rounded-lg'>
-        //             <h3 className='font-bold text-gray-500 text-md'>Other details</h3>
-        //             <div className="divider"></div>
-        //             <div>
-        //                 <h5 className='font-bold text-gray-500 text-sm'>Event Description</h5>
-        //                 <p className='font-normal text-gray-500 text-sm'>{event.description}</p>
-        //             </div>
-
-        //             <div className='mt-3'>
-        //                 <h5 className='font-bold text-gray-500 text-sm'>Organizer Contact Information & Special Instructions</h5>
-        //                 <p className='font-normal text-gray-500 text-sm'>{event.specialInstructions}</p>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </>
         <div>
             <div className="lg:mx-28 mx-5 2xl:mx-96 lg:h-screen h-full pt-32 lg:px-28 pb-16">
                 <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-7 gap-5">
@@ -361,7 +200,7 @@ const Page = ({ params }) => {
                             <div className="flex items-center gap-1 mt-2">
                                 <CalendarIcon className="size-6 stroke-2 text-[#373737]" />
                                 <p className={`text-[#373737] font-bold text-lg ${Inria?.className} style={{ fontWeight: 700 }}`}>
-                                {formatDateTime(event?.startDateTime)}
+                                    {formatDateTime(event?.startDateTime)}
                                 </p>
                             </div>
                             <div className="flex items-center gap-1 mt-1">
@@ -372,7 +211,7 @@ const Page = ({ params }) => {
                             </div>
                             <div className="card-actions justify-between items-center bg-gray-200 rounded-sm mt-5 py-[10px] px-[10px]">
                                 <p className={`text-gray-800 font-bold text-2xl ${Inria.className} style={{ fontWeight: 700 }}`}>
-                                    3232 BDT
+                                    BDT  {event?.price}
                                 </p>
                                 <button onClick={handlePurchase} className={`bg-gray-800 hover:bg-gray-950 text-white py-1 px-3 rounded-sm text-lg ${Inria.className}`}>
                                     BUY NOW
