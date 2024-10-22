@@ -53,9 +53,9 @@ const ResetPasswordPage = () => {
     };
 
     return (
-        <div className='mt-12'>
+        <div className='h-full lg:h-screen lg:pt-28 pt-24 pb-10 mx-5'>
             <div className='flex justify-center items-center'>
-                <div className='w-[500px] bg-white p-7 rounded-lg'>
+                <div className='w-[500px] bg-white p-7 rounded-md'>
                     <p className='text-center font-bold text-gray-500'>Reset Password</p>
                     <p className='text-center text-xs font-semibold text-gray-400 mt-3 mb-4'>
                         Enter your new password below.
@@ -72,21 +72,21 @@ const ResetPasswordPage = () => {
                             <input
                                 type="password"
                                 placeholder="New Password"
-                                className="input outline-none focus:no-underline w-full max-w-xl bg-[#eeeaea]"
+                                className="input outline-none focus:no-underline w-full max-w-xl bg-slate-100"
                                 value={newPassword}
                                 onChange={(e) => setNewPassword(e.target.value)}
                                 required
                             />
                         </label>
 
-                        <label className="form-control w-full max-w-xl mt-4">
+                        <label className="form-control w-full max-w-xl mt-2">
                             <div className="label">
                                 <span className="label-text">Confirm Password</span>
                             </div>
                             <input
                                 type="password"
                                 placeholder="Confirm Password"
-                                className="input outline-none focus:no-underline w-full max-w-xl bg-[#eeeaea]"
+                                className="input outline-none focus:no-underline w-full max-w-xl bg-slate-100"
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 required
@@ -96,7 +96,7 @@ const ResetPasswordPage = () => {
                         <div className='mt-4'>
                             <button
                                 type="submit"
-                                className='text-[16px] bg-[#E61D64] btn border-0 rounded-full text-white font-medium px-12 w-full hover:bg-[#ba4870]'
+                                className='text-[16px] bg-[#E61D64] btn border-0 rounded-md text-white font-medium px-12 w-full hover:bg-[#ba4870]'
                             >
                                 Reset Password
                             </button>

@@ -23,11 +23,11 @@ const ForgetPasswordPage = () => {
     };
 
     return (
-        <div className='mt-12'>
+        <div className='h-full lg:h-screen lg:pt-28 pt-24 pb-10 mx-5'>
             <div className='flex justify-center items-center'>
-                <div className='w-[500px] bg-white p-7 rounded-lg'>
-                    <p className='text-center font-bold text-gray-500'>Forgot password?</p>
-                    <p className='text-center text-xs font-semibold text-gray-400 mt-3 mb-4'>
+                <div className='w-[500px] bg-white p-7 rounded-md'>
+                    <p className='text-center font-bold text-gray-800'>Forgot password?</p>
+                    <p className='text-center text-xs font-semibold text-gray-700 mt-3 mb-4'>
                         No worries! Enter your email to reset your password and regain access to your account.
                     </p>
 
@@ -42,7 +42,7 @@ const ForgetPasswordPage = () => {
                             <input
                                 type="email"
                                 placeholder="Type here"
-                                className="input outline-none focus:no-underline w-full max-w-xl bg-[#eeeaea]"
+                                className="input outline-none focus:no-underline w-full max-w-xl bg-slate-100"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
@@ -52,7 +52,7 @@ const ForgetPasswordPage = () => {
                         <div className='mt-2'>
                             <button
                                 type="submit"
-                                className='text-[16px] bg-[#E61D64] btn border-0 rounded-full text-white font-medium px-12 w-full hover:bg-[#ba4870]'
+                                className='text-[16px] bg-[#E61D64] btn border-0 rounded-md text-white font-medium px-12 w-full hover:bg-[#ba4870]'
                             >
                                 Submit
                             </button>
