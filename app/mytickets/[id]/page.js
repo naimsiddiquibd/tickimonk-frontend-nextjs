@@ -129,15 +129,17 @@ const Page = ({ params }) => {
                     </div>
                 </div>
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-2 max-w-3xl'>
-                    <div ref={ticketRef}>
-                        <Ticket
-                            ticketId={id}
-                            showName={event?.eventName}
-                            dateTime={formattedStartDateTime}
-                            customerName={ticketUserName}
-                            ticketPrice={event?.price}
-                            ticketStatus={ticket?.status}
-                        />
+                    <div>
+                        <div ref={ticketRef}>
+                            <Ticket
+                                ticketId={id}
+                                showName={event?.eventName}
+                                dateTime={formattedStartDateTime}
+                                customerName={ticketUserName}
+                                ticketPrice={event?.price}
+                                ticketStatus={ticket?.status}
+                            />
+                        </div>
                         <div className='mt-5'>
                             <div onClick={handleDownload} className='text-[16px] bg-[#E61D64] btn border-0 rounded-md text-white font-medium px-12 w-full lg:w-96 hover:bg-[#ba4870]'>
                                 Download Now

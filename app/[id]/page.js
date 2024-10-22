@@ -69,38 +69,50 @@ const Page = ({ params }) => {
             alert('Event not found');
             return;
         }
-
+    
         // Gather additional required data
         const paymentData = {
-            amount: event.price, // Assuming `event.price` contains the price of the ticket
+            amount: event.price, 
             currency: "BDT",
-            product_name: event.eventName, // Use the event name
-            product_description: event.description, // Use the event description
-            name: "John Doe", // Replace with dynamic value if available
-            email: "john.doe@example.com", // Replace with dynamic value if available
-            phone: "01712345678", // Replace with dynamic value if available
-            address: "123 Test Street", // Replace with dynamic value if available
-            city: "Dhaka", // Replace with dynamic value if available
-            state: "Dhaka", // Replace with dynamic value if available
-            zipcode: "1000", // Replace with dynamic value if available
-            country: "BD", // Replace with dynamic value if available
-            redirect_url: "https://tickimonk.vercel.app/mytickets", // Replace with your redirect URL
-            ipn_url: "https://tickimonk.vercel.app" // Replace with your IPN URL
+            product_name: event.eventName, 
+            product_description: event.description, 
+            name: "John Doe", 
+            email: "john.doe@example.com", 
+            phone: "01712345678", 
+            address: "123 Test Street", 
+            city: "Dhaka", 
+            state: "Dhaka", 
+            zipcode: "1000", 
+            country: "BD", 
+            redirect_url: "https://tickimonk.vercel.app/mytickets", 
+            ipn_url: "https://tickimonk.vercel.app"
         };
-
+    
         try {
             const purchaseResult = await purchaseTicket({ eventId: id, price: event.price });
-
+    
             if (purchaseResult.success) {
                 const ticketId = purchaseResult.data._id;
-
+    
                 // After successful ticket creation, initiate payment
                 const paymentResult = await payForTicket({ ticketId, paymentData });
                 console.log("reeeee:", paymentResult);
                 if (paymentResult.success) {
                     // Redirect to the payment URL from the response if available
-                    const paymentUrl = paymentResult.data.data.action.url; // Adjust this line based on your API response
-                    window.location.href = paymentUrl;
+                    const paymentUrl = paymentResult.data.data.action.url; 
+    
+                    // Calculate the popup dimensions and position to center it
+                    const popupWidth = 400;
+                    const popupHeight = 618; // Taller for vertical layout
+                    const popupX = (window.screen.width - popupWidth) / 2;
+                    const popupY = (window.screen.height - popupHeight) / 2;
+    
+                    // Open the centered popup
+                    window.open(
+                        paymentUrl,
+                        'PaymentPopup',
+                        `width=${popupWidth},height=${popupHeight},left=${popupX},top=${popupY},resizable=yes,scrollbars=yes`
+                    );
                 } else {
                     alert('Failed to initiate payment.');
                 }
@@ -112,6 +124,8 @@ const Page = ({ params }) => {
             alert('An error occurred while purchasing the ticket.');
         }
     };
+    
+    
 
 
     if (loading) {
@@ -168,7 +182,7 @@ const Page = ({ params }) => {
         <div>
             <div className="lg:mx-28 mx-5 2xl:mx-96 lg:h-screen h-full pt-32 lg:px-28 pb-16">
                 <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-7 gap-5">
-                    <div className="bg-[#261E62] p-4 rounded-md lg:col-span-2 max-h-80">
+                    {/* <div className="bg-[#261E62] p-4 rounded-md lg:col-span-2 max-h-80">
                         <div className="h-[180px] lg:h-[215px] w-full">
                             <Image
                                 src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${event.thumbnail}`}
@@ -190,6 +204,18 @@ const Page = ({ params }) => {
                             </div>
                             <p className={`text-white font-bold text-xl ${Inria.className} style={{ fontWeight: 700 }}`}>{event?.eventName}</p>
                         </div>
+                    </div> */}
+                    <div className="rounded-md lg:col-span-2 max-h-80">
+                        <div className="h-full w-full">
+                            <Image
+                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${event.thumbnail}`}
+                                width={500}
+                                height={500}
+                                alt="Event Image"
+                                className="object-cover w-full h-full"
+                            />
+                        </div>
+                       
                     </div>
                     <div className="lg:col-span-3">
                         <div className="gap-0 rounded-b-md">
