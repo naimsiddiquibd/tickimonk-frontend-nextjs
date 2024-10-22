@@ -99,20 +99,22 @@ const Page = ({ params }) => {
                 console.log("reeeee:", paymentResult);
                 if (paymentResult.success) {
                     // Redirect to the payment URL from the response if available
-                    const paymentUrl = paymentResult.data.data.action.url; 
+                    // const paymentUrl = paymentResult.data.data.action.url; 
     
-                    // Calculate the popup dimensions and position to center it
-                    const popupWidth = 400;
-                    const popupHeight = 618; // Taller for vertical layout
-                    const popupX = (window.screen.width - popupWidth) / 2;
-                    const popupY = (window.screen.height - popupHeight) / 2;
+                    // // Calculate the popup dimensions and position to center it
+                    // const popupWidth = 400;
+                    // const popupHeight = 618; // Taller for vertical layout
+                    // const popupX = (window.screen.width - popupWidth) / 2;
+                    // const popupY = (window.screen.height - popupHeight) / 2;
     
-                    // Open the centered popup
-                    window.open(
-                        paymentUrl,
-                        'PaymentPopup',
-                        `width=${popupWidth},height=${popupHeight},left=${popupX},top=${popupY},resizable=yes,scrollbars=yes`
-                    );
+                    // // Open the centered popup
+                    // window.open(
+                    //     paymentUrl,
+                    //     'PaymentPopup',
+                    //     `width=${popupWidth},height=${popupHeight},left=${popupX},top=${popupY},resizable=yes,scrollbars=yes`
+                    // );
+                    const paymentUrl = paymentResult.data.data.action.url; // Adjust this line based on your API response
+                    window.location.href = paymentUrl;
                 } else {
                     alert('Failed to initiate payment.');
                 }

@@ -128,7 +128,7 @@ const Page = ({ params }) => {
                         </ul>
                     </div>
                 </div>
-                <div className='grid grid-cols-1 lg:grid-cols-2 gap-2 max-w-3xl'>
+                <div className='grid grid-cols-1 lg:grid-cols-2 gap-2 max-w-3xl lg:min-h-screen h-full'>
                     <div>
                         <div ref={ticketRef}>
                             <Ticket
