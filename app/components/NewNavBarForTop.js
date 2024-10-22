@@ -47,12 +47,12 @@ const NewNavBarForTop = ({ session }) => {
                 {/* Navbar */}
                 <div className="navbar bg-slate-50 bg-opacity-5 mx-auto w-full rounded-md shadow-sm">
                     <div className="flex-none lg:hidden">
-                        <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost">
+                        <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost ">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
-                                className="inline-block h-6 w-6 stroke-current">
+                                className="inline-block h-6 w-6 stroke-current text-slate-700">
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
