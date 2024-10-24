@@ -8,7 +8,7 @@ import Linkedin from '../../public/in.svg';
 
 const Footer = () => {
     return (
-        <div className="mt-8 lg:mt-20">
+        <div className="mt-8 lg:my-16">
             <div className="">
                 <div>
                     <Link href="/">
@@ -29,12 +29,12 @@ const Footer = () => {
                 </div>
                 <div>
                     <div className="text-sm font-bold text-gray-800 my-6 lg:flex lg:items-center gap-3">
-                        <p>Privacey & Policy</p>
-                        <p>Terms & Condition</p>
-                        <p>Live Chat</p>
+                        <Link href="/privacy-policy">Privacey & Policy</Link>
+                        <Link href="/terms-condition">Terms & Condition</Link>
+                        <Link href="https://www.facebook.com/fatmonkhere">Live Chat</Link>
                     </div>
                     <div className="flex items-center gap-2 mt-1 lg:mt-3">
-                        <Link href="/">
+                        <Link href="https://www.facebook.com/fatmonkhere">
                             <Image
                                 src={Facebook}
                                 width={30}
@@ -42,20 +42,20 @@ const Footer = () => {
                                 alt="Facebook"
                             />
                         </Link>
-                        <Link href="/">
+                        <Link href="https://x.com/FatmonkStudio">
                             <Image
                                 src={X}
                                 width={30}
                                 height={30}
-                                alt="Facebook"
+                                alt="X"
                             />
                         </Link>
-                        <Link href="/">
+                        <Link href="https://www.linkedin.com/company/fatmonk/mycompany/verification/">
                             <Image
                                 src={Linkedin}
                                 width={30}
                                 height={30}
-                                alt="Facebook"
+                                alt="LinkedIn"
                             />
                         </Link>
                     </div>

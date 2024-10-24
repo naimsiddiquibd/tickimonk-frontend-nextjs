@@ -210,7 +210,7 @@ const Page = ({ params }) => {
                     <div className="rounded-md lg:col-span-2 max-h-80">
                         <div className="h-full w-full">
                             <Image
-                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${event.thumbnail}`}
+                                src={event?.thumbnail}
                                 width={500}
                                 height={500}
                                 alt="Event Image"

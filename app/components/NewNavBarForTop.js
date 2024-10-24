@@ -8,15 +8,12 @@ import Image from 'next/image';
 
 const navItems = [
     { href: '/', label: 'Home' },
-    // { href: '/bookmarks', label: 'Bookmarks' },
     { href: '/mytickets', label: 'My Tickets' },
     { href: '/my-events', label: 'My Events', requiresOrganizer: true },
     { href: '/create-event', label: 'Create Event', requiresOrganizer: true },
     { href: '/qr-scanner', label: 'Scanner', requiresOrganizer: true },
-    // { href: '/profile', label: 'Profile' }
 ];
 
-// Navigation items for unauthenticated users
 const guestNavItems = [
     { href: '/', label: 'Home' },
     { href: '/signup', label: 'Join Now' }
@@ -32,19 +29,19 @@ const Inria = Inria_Sans({
 const NewNavBarForTop = ({ session }) => {
     const pathname = usePathname();
 
-    // Choose the appropriate logo based on the current path
     const logo = pathname === '/' ? LogoForWhiteBg : LogoForOtherBg;
 
-    // Filter navigation items based on user's authentication and role
     const filteredNavItems = session?.user
         ? navItems.filter(item => !item.requiresOrganizer || session.user.role === 'organizer')
         : guestNavItems;
+
+    // Dynamic color based on pathname
+    const userNameColor = pathname === '/' ? 'text-white font-semibold' : 'text-gray-600 font-semibold';
 
     return (
         <div className="absolute z-[999999] drawer mb-4 pt-5 lg:px-14 px-5">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col lg:mx-16">
-                {/* Navbar */}
                 <div className="navbar bg-slate-50 bg-opacity-5 mx-auto w-full rounded-md shadow-sm">
                     <div className="flex-none lg:hidden">
                         <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost ">
@@ -72,7 +69,7 @@ const NewNavBarForTop = ({ session }) => {
                         </Link>
                     </div>
                     <div className="hidden flex-none lg:block navbar-center">
-                        <ul className="menu menu-horizontal">
+                    <ul className="menu menu-horizontal">
                             {/* Dynamic Navbar content */}
                             {filteredNavItems.map(item => (
                                 <li key={item.href}>
@@ -94,18 +91,37 @@ const NewNavBarForTop = ({ session }) => {
                     </div>
                     <div className="navbar-end mr-2">
                         {session?.user ? (
-                            <button 
-                                onClick={() => signOut()} 
-                                className={`px-6 py-2 shadow-sm rounded-sm font-bold ${pathname === '/' 
-                                    ? 'bg-white text-[#DE135A]' 
-                                    : 'bg-[#DE135A] text-white'} ${Inria.className} style={{ fontWeight: 700 }}`}>
-                                Logout
-                            </button>
+                            <div className="flex items-center gap-2">
+                                <div className="hidden lg:block">
+                                    <p className={userNameColor}>{session?.user?.name}</p>
+                                </div>
+                                <div className="dropdown dropdown-end">
+                                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                        <div className="w-10 rounded-full">
+                                            <img
+                                                alt="User Avatar"
+                                                className="bg-white p-0.5"
+                                                src="https://cdn1.iconfinder.com/data/icons/fruit-cartoon-flat-cute-fruity/512/mango-512.png" />
+                                        </div>
+                                    </div>
+                                    <ul
+                                        tabIndex={0}
+                                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                                        <li>
+                                            <a className="justify-between">
+                                                Profile
+                                                <span className="badge">Upcoming!</span>
+                                            </a>
+                                        </li>
+                                        <li><a onClick={() => signOut()} >Logout</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         ) : (
                             <Link href="/login">
-                                <div 
-                                    className={`px-6 py-2 rounded-sm shadow-sm font-bold ${pathname === '/' 
-                                        ? 'bg-white text-[#DE135A]' 
+                                <div
+                                    className={`px-6 py-2 rounded-sm shadow-sm font-bold ${pathname === '/'
+                                        ? 'bg-white text-[#DE135A]'
                                         : 'bg-[#DE135A] text-white'} ${Inria.className} style={{ fontWeight: 700 }}`}>
                                     Login
                                 </div>
@@ -118,7 +134,6 @@ const NewNavBarForTop = ({ session }) => {
             <div className="drawer-side">
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu bg-base-200 min-h-full w-80 p-4">
-                    {/* Dynamic Sidebar content */}
                     {filteredNavItems.map(item => (
                         <li key={item.href}>
                             <a

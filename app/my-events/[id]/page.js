@@ -106,7 +106,7 @@ const Page = ({ params }) => {
           <div className="bg-[#261E62] p-4 rounded-md lg:col-span-2 max-h-80">
             <div className="h-[180px] lg:h-[215px] w-full">
               <Image
-                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${event.thumbnail}`}
+                src={event.thumbnail}
                 width={500}
                 height={500}
                 alt="Event Image"
@@ -116,7 +116,7 @@ const Page = ({ params }) => {
             <div className="flex justify-start items-center gap-2 mt-5">
               <div className="w-12 h-12">
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${event.eventLogo}`}
+                  src={event.eventLogo}
                   width={500}
                   height={500}
                   alt="Event Image"

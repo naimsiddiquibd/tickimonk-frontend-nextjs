@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createEvent } from "@/utils/actions/createEvent";
 import EventDetailsStep from "./Stepts/EventDetailsStep";
 import EventScheduleStep from "./Stepts/EventScheduleStep";
@@ -8,12 +8,13 @@ import EventSettingsStep from "./Stepts/EventSettingsStep";
 import EventDescriptionStep from "./Stepts/EventDescriptionStep";
 import EventMediaStep from "./Stepts/EventMediaStep.";
 import { changeUserRole } from "@/utils/actions/changeUserRole";
+import { fetchCurrentUser } from "@/utils/actions/fetchCurrentUser";
+import { signOut } from "next-auth/react";
 
 const EventForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     eventName: "",
-    // organizer: "",
     eventCategory: "",
     venue: "",
     startDateTime: "",
@@ -29,7 +30,11 @@ const EventForm = () => {
     thumbnail: null,
   });
 
+  const [loading, setLoading] = useState(false); // Loading state
   const [message, setMessage] = useState({ text: "", type: "" });
+
+  const [user, setUser] = useState(null); // State to hold user data
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, type, value, checked, files } = e.target;
@@ -40,52 +45,78 @@ const EventForm = () => {
     }));
   };
 
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      const result = await fetchCurrentUser();
+      if (result.success) {
+        console.log('Current User Data:', result.data);
+        setUser(result.data); // Set the user data in state
+      } else {
+        console.error('Error fetching current user:', result.error);
+        setError(result.error); // Set the error in state
+      }
+    };
+
+    getCurrentUser();
+  }, []);
+
+  console.log("User role from current api:", user?.role);
+
   const handleSubmit = async () => {
-    // Step 1: Change the user's role before submitting the event
-    const roleChangeResult = await changeUserRole("organizer");
+    setLoading(true); // Start loading when submitting
+    try {
+      let roleChanged = false;
 
-    if (!roleChangeResult.success) {
-      // Handle role change failure
-      setMessage({
-        text: `Error updating role: ${roleChangeResult.error}`,
-        type: "error",
+      // Step 1: Check and change the user's role if necessary
+      if (user.role !== "organizer") {
+        const roleChangeResult = await changeUserRole("organizer");
+        if (!roleChangeResult.success) {
+          setMessage({
+            text: `Error updating role: ${roleChangeResult.error}`,
+            type: "error",
+          });
+          setLoading(false);
+          return;
+        }
+        roleChanged = true; // Track that the role has changed
+      }
+
+      // Step 2: Proceed to create the event after ensuring the role is "organizer"
+      const data = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        data.append(key, value);
       });
-      return; // Stop the submission process if the role change fails
-    }
 
-    // Step 2: Proceed to create the event after successfully changing the role
-    const data = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      data.append(key, value);
-    });
+      const result = await createEvent(data);
 
-    const result = await createEvent(data);
+      if (result.success) {
+        setMessage({ text: "Event created successfully!", type: "success" });
 
-    if (result.success) {
-      setMessage({ text: "Event created successfully!", type: "success" });
-    } else {
-      setMessage({ text: `Error: ${result.error}`, type: "error" });
+        // Step 3: Log out if the user's role was changed
+        if (roleChanged) {
+          await signOut(); // Call the logout function
+        }
+      } else {
+        setMessage({ text: `Error: ${result.error}`, type: "error" });
+      }
+    } catch (error) {
+      setMessage({ text: "An unexpected error occurred.", type: "error" });
+    } finally {
+      setLoading(false); // Stop loading after submission
     }
   };
 
-
   const validateStep = () => {
-    // Add validation for each step based on the current step
     switch (currentStep) {
       case 1:
-        // Example: Check if eventName and organizer fields are filled
         return formData.eventName.trim() !== "";
       case 2:
-        // Example: Check if startDateTime and endDateTime fields are filled
         return formData.startDateTime.trim() !== "" && formData.endDateTime.trim() !== "";
       case 3:
-        // Example: Check if ageRestriction and dressCode fields are filled
         return formData.ageRestriction.trim() !== "" && formData.dressCode.trim() !== "";
       case 4:
-        // Example: Check if description field is filled
         return formData.description.trim() !== "";
       case 5:
-        // Example: Check if logo and thumbnail are uploaded
         return formData.logo !== null && formData.thumbnail !== null;
       default:
         return true;
@@ -108,7 +139,7 @@ const EventForm = () => {
         <div className="breadcrumbs text-sm text-gray-400">
           <ul>
             <li><a>Home</a></li>
-            <li><a>My Tickets</a></li>
+            <li><a>My Tickets {user?.name}</a></li>
           </ul>
         </div>
       </div>
@@ -126,19 +157,21 @@ const EventForm = () => {
           </div>
         )}
 
-        {currentStep === 1 && (
+        {loading && <p className="text-center text-gray-500">Loading...</p>} {/* Loading indicator */}
+
+        {!loading && currentStep === 1 && (
           <EventDetailsStep formData={formData} handleChange={handleChange} />
         )}
-        {currentStep === 2 && (
+        {!loading && currentStep === 2 && (
           <EventScheduleStep formData={formData} handleChange={handleChange} />
         )}
-        {currentStep === 3 && (
+        {!loading && currentStep === 3 && (
           <EventSettingsStep formData={formData} handleChange={handleChange} />
         )}
-        {currentStep === 4 && (
+        {!loading && currentStep === 4 && (
           <EventDescriptionStep formData={formData} handleChange={handleChange} />
         )}
-        {currentStep === 5 && (
+        {!loading && currentStep === 5 && (
           <EventMediaStep formData={formData} handleChange={handleChange} />
         )}
 
@@ -148,6 +181,7 @@ const EventForm = () => {
               type="button"
               onClick={handlePrev}
               className="bg-gray-300 text-gray-900 px-12 py-3 rounded-sm"
+              disabled={loading} // Disable buttons while loading
             >
               Previous
             </button>
@@ -157,6 +191,7 @@ const EventForm = () => {
               type="button"
               onClick={handleNext}
               className="bg-[#E61D64] text-white px-12 py-3 rounded-sm"
+              disabled={loading} // Disable buttons while loading
             >
               Next
             </button>
@@ -165,6 +200,7 @@ const EventForm = () => {
               type="button"
               onClick={handleSubmit}
               className="bg-[#E61D64] text-white px-12 py-3 rounded-sm"
+              disabled={loading} // Disable buttons while loading
             >
               Submit
             </button>

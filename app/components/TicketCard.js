@@ -182,7 +182,7 @@ const TicketCard = ({ searchQuery }) => {
                     <div className="card card-compact bg-base-100 w-full shadow-sm rounded-md">
                         <figure className="relative">
                             <Image
-                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${event?.thumbnail}`}
+                                src={event?.thumbnail}
                                 width={500}
                                 height={500}
                                 alt="Event Image"
