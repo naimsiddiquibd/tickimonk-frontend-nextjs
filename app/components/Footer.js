@@ -8,7 +8,7 @@ import Linkedin from '../../public/in.svg';
 
 const Footer = () => {
     return (
-        <div className="mt-8 lg:my-16">
+        <div className="mt-8 lg:my-16 lg:mx-28 mx-5 2xl:mx-96">
             <div className="">
                 <div>
                     <Link href="/">

@@ -182,7 +182,7 @@ const Page = ({ params }) => {
     return (
 
         <div>
-            <div className="lg:mx-28 mx-5 2xl:mx-96 lg:h-screen h-full pt-32 lg:px-28 pb-16">
+            <div className="lg:mx-28 mx-5 2xl:mx-96 lg:min-h-screen min-h-screen h-full pt-32 lg:px-28 pb-16">
                 <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-7 gap-5">
                     {/* <div className="bg-[#261E62] p-4 rounded-md lg:col-span-2 max-h-80">
                         <div className="h-[180px] lg:h-[215px] w-full">

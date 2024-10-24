@@ -4,7 +4,7 @@ import React from 'react';
 const GetStarted = () => {
     return (
         <div>
-            <div className=" bg-[#E2185F] p-6 lg:p-20 rounded-md mt-5 lg:mt-12">
+            <div className=" bg-[#E2185F] p-6 lg:p-20 rounded-md mt-5 lg:mt-12 lg:mx-28 mx-5 2xl:mx-96">
                 <div className="col-span-3">
                     <div className="lg:flex lg:items-center lg:justify-between ">
                         <h2 className="text-white text-[40px] leading-snug font-semibold">

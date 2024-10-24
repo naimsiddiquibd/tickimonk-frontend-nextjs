@@ -7,6 +7,9 @@ import { authOptions } from "@/utils/authOptions";
 import { getServerSession } from "next-auth";
 import Navbar from "./components/Navbar";
 import NewNavBarForTop from "./components/NewNavBarForTop";
+import Footer from "./components/Footer";
+import Copyright from "./components/Copyright";
+import GetStarted from "./components/GetStarted";
 
 
 
@@ -28,6 +31,9 @@ export default async function RootLayout({ children }) {
             <div>
               {children}
             </div>
+            <GetStarted></GetStarted>
+            <Footer></Footer>
+            <Copyright></Copyright>
           </div>
         </div>
       </body>
