@@ -55,7 +55,7 @@ const PopularEvents = () => {
                         <div className='flex justify-start gap-2 mt-4'>
                             <div className='lg:col-span-2 w-[70px] h-[50px] overflow-hidden rounded-lg'>
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${event.thumbnail}`}
+                                    src={event?.thumbnail}
                                     width={60}
                                     height={4}
                                     alt={event.eventName}

@@ -91,7 +91,7 @@ const MyTickets = () => {
                                             <div className="avatar">
                                                 <div className="mask mask-squircle h-12 w-12">
                                                     <Image
-                                                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${ticket?.thumbnail}`}
+                                                        src={ticket?.thumbnail}
                                                         width={500}
                                                         height={500}
                                                         alt="Event Image"
