@@ -17,6 +17,7 @@ const navItems = [
 const guestNavItems = [
     { href: '/', label: 'Home' },
     { href: '/signup', label: 'Join Now' }
+    { href: '/create-event', label: 'Create Event' }
 ];
 
 import { Inria_Sans } from "next/font/google";
