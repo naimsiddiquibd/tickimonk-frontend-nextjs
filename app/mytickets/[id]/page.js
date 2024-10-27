@@ -91,7 +91,7 @@ const Page = ({ params }) => {
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center h-screen bg-slate-100">
+            <div className="flex justify-center items-center h-screen ">
                 <p>Loading...</p>
             </div>
         );
@@ -99,7 +99,7 @@ const Page = ({ params }) => {
 
     if (error) {
         return (
-            <div className="flex justify-center items-center h-screen bg-slate-100">
+            <div className="flex justify-center items-center h-screen ">
                 <p>Error: {error}</p>
             </div>
         );
@@ -107,18 +107,20 @@ const Page = ({ params }) => {
 
     if (!event) {
         return (
-            <div className="flex justify-center items-center h-screen bg-slate-100">
+            <div className="flex justify-center items-center h-screen">
                 <p>No event found!</p>
             </div>
         );
     }
 
-    const formattedStartDateTime = new Date(event?.startDateTime).toLocaleString();
-    const formattedEndDateTime = new Date(event?.endDateTime).toLocaleString();
+    const formatedStartDate = new Date(event?.startDate).toLocaleString();
+    const formatedStartTime = new Date(event?.startTime).toLocaleString();
+    const formatedEndDate = new Date(event?.endDate).toLocaleString();
+    const formatedEndTime = new Date(event?.endTime).toLocaleString();
 
     return (
         <div className="w-full flex justify-center">
-            <div className='pt-28 pb-16 lg:mx-28 mx-5 2xl:mx-96'>
+            <div className='pt-28 lg:mx-28 mx-5 2xl:mx-96'>
                 <div className='flex justify-start items-center gap-2 mb-5'>
                     <div className="breadcrumbs text-sm text-gray-400">
                         <ul>
@@ -134,7 +136,7 @@ const Page = ({ params }) => {
                             <Ticket
                                 ticketId={id}
                                 showName={event?.eventName}
-                                dateTime={formattedStartDateTime}
+                                dateTime={formatedStartDate}
                                 customerName={ticketUserName}
                                 ticketPrice={event?.price}
                                 ticketStatus={ticket?.status}
@@ -151,55 +153,55 @@ const Page = ({ params }) => {
                         <div className="divider divider-horizontal ml-3 mr-3 hidden lg:block"></div>
                         <div className="mt-3">
                             <div>
-                                <h5 className='font-semibold text-gray-500 text-sm'>Event Name</h5>
-                                <p className='font-semibold text-gray-500 text-[10px]'>{event?.eventName}</p>
+                                <h5 className='font-semibold text-gray-200 text-sm'>Event Name</h5>
+                                <p className='font-semibold text-gray-200 text-[10px]'>{event?.eventName}</p>
                             </div>
                             <div className='mt-2'>
-                                <h5 className='font-semibold text-gray-500 text-sm'>Location</h5>
-                                <p className='font-semibold text-gray-500 text-[10px]'>{event?.venue}</p>
+                                <h5 className='font-semibold text-gray-200 text-sm'>Location</h5>
+                                <p className='font-semibold text-gray-200 text-[10px]'>{event?.venue}</p>
                             </div>
                             <div className='mt-2'>
-                                <h5 className='font-semibold text-gray-500 text-sm'>Organizer</h5>
-                                <p className='font-semibold text-gray-500 text-[10px]'>{organizerName}</p>
+                                <h5 className='font-semibold text-gray-200 text-sm'>Organizer</h5>
+                                <p className='font-semibold text-gray-200 text-[10px]'>{organizerName}</p>
                             </div>
                             <div className='mt-2'>
-                                <h5 className='font-semibold text-gray-500 text-sm'>Event Category</h5>
-                                <p className='font-semibold text-gray-500 text-[10px]'>{event?.eventCategory}</p>
+                                <h5 className='font-semibold text-gray-200 text-sm'>Event Category</h5>
+                                <p className='font-semibold text-gray-200 text-[10px]'>{event?.eventCategory}</p>
                             </div>
                             <div className='mt-2'>
-                                <h5 className='font-semibold text-gray-500 text-sm'>Start Date & Time</h5>
-                                <p className='font-semibold text-gray-500 text-[10px]'>{formattedStartDateTime}</p>
+                                <h5 className='font-semibold text-gray-200 text-sm'>Start Date & Time</h5>
+                                <p className='font-semibold text-gray-200 text-[10px]'>{formatedStartDate}</p>
                             </div>
                             <div className='mt-2'>
-                                <h5 className='font-semibold text-gray-500 text-sm'>End Date & Time</h5>
-                                <p className='font-semibold text-gray-500 text-[10px]'>{formattedEndDateTime}</p>
+                                <h5 className='font-semibold text-gray-200 text-sm'>End Date & Time</h5>
+                                <p className='font-semibold text-gray-200 text-[10px]'>{formatedEndDate}</p>
                             </div>
                             <div className='mt-2'>
-                                <h5 className='font-semibold text-gray-500 text-sm'>Time Zone</h5>
-                                <p className='font-semibold text-gray-500 text-[10px]'>{event?.timezone}</p>
+                                <h5 className='font-semibold text-gray-200 text-sm'>Time Zone</h5>
+                                <p className='font-semibold text-gray-200 text-[10px]'>{event?.timezone}</p>
                             </div>
                             <div className='mt-2'>
-                                <h5 className='font-semibold text-gray-500 text-sm'>Recurring Event</h5>
-                                <p className='font-semibold text-gray-500 text-[10px]'>
+                                <h5 className='font-semibold text-gray-200 text-sm'>Recurring Event</h5>
+                                <p className='font-semibold text-gray-200 text-[10px]'>
                                     {event?.recurringEvent ? "Yes" : "No"}
                                 </p>
                             </div>
                             <div className='mt-2'>
-                                <h5 className='font-semibold text-gray-500 text-sm'>Age Restrictions</h5>
-                                <p className='font-semibold text-gray-500 text-[10px]'>{event?.ageRestriction}</p>
+                                <h5 className='font-semibold text-gray-200 text-sm'>Age Restrictions</h5>
+                                <p className='font-semibold text-gray-200 text-[10px]'>{event?.ageRestriction}</p>
                             </div>
                             <div className='mt-2'>
-                                <h5 className='font-semibold text-gray-500 text-sm'>Dress Code</h5>
-                                <p className='font-semibold text-gray-500 text-[10px]'>{event?.dressCode}</p>
+                                <h5 className='font-semibold text-gray-200 text-sm'>Dress Code</h5>
+                                <p className='font-semibold text-gray-200 text-[10px]'>{event?.dressCode}</p>
                             </div>
                             <div className='mt-5'>
                                 <div>
-                                    <h5 className='font-semibold text-gray-500 text-sm'>Event Description</h5>
-                                    <p className='font-semibold text-gray-500 text-[12px]'>{event?.description}</p>
+                                    <h5 className='font-semibold text-gray-200 text-sm'>Event Description</h5>
+                                    <p className='font-semibold text-gray-200 text-[12px]'>{event?.description}</p>
                                 </div>
                                 <div className='mt-2'>
-                                    <h5 className='font-semibold text-gray-500 text-sm'>Organizer Contact Information & Special Instructions</h5>
-                                    <p className='font-semibold text-gray-500 text-[12px]'>{event?.specialInstructions}</p>
+                                    <h5 className='font-semibold text-gray-200 text-sm'>Organizer Contact Information & Special Instructions</h5>
+                                    <p className='font-semibold text-gray-200 text-[12px]'>{event?.specialInstructions}</p>
                                 </div>
                             </div>
 

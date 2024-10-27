@@ -48,7 +48,7 @@ const TicketCard = ({ searchQuery }) => {
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center h-screen bg-slate-100">
+            <div className="flex justify-center items-center h-screen ">
                 <p>Loading...</p>
             </div>
         );
@@ -82,7 +82,7 @@ const TicketCard = ({ searchQuery }) => {
 
     return (
         <div>
-             <h2 className="text text-3xl font-bold text-gray-800 text-center my-5">All in One Place with TikiMonk</h2>
+             {/* <h2 className="text text-3xl font-bold text-gray-800 text-center my-5">All in One Place with TikiMonk</h2> */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mx-auto">
             {sortedEvents.map(event => {
                 const shareUrl = `https://tickimonk.vercel.app/${event._id}`; // Construct the share URL dynamically
@@ -179,7 +179,7 @@ const TicketCard = ({ searchQuery }) => {
                     //         </div>
                     //     </div>
                     // </div>
-                    <div className="card card-compact bg-base-100 w-full shadow-sm rounded-md">
+                    <div className="card card-compact 0 w-full shadow-sm rounded-md">
                         <figure className="relative">
                             <Image
                                 src={event?.thumbnail}
@@ -193,19 +193,19 @@ const TicketCard = ({ searchQuery }) => {
                                 {event.eventCategory}
                             </button>
                         </figure>
-                        <div className="card-body bg-white gap-0 rounded-b-md">
-                            <Link href={`/${event._id}`} className={`text-gray-800 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>
+                        <div className="card-body bg-white bg-opacity-10 gap-0 rounded-b-md">
+                            <Link href={`/${event._id}`} className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>
                                 {event.eventName}
                             </Link>
                             <div className="flex items-center gap-1 mt-2">
-                                <CalendarIcon className="size-5 stroke-2 text-[#373737]" />
-                                <p className={`text-[#373737] font-bold text-[11.3px] ${Inria?.className} style={{ fontWeight: 700 }}`}>
+                                <CalendarIcon className="size-5 stroke-2 text-gray-200" />
+                                <p className={`text-gray-200 font-bold text-[11.3px] ${Inria?.className} style={{ fontWeight: 700 }}`}>
                                     {formatDateTime(event?.startDateTime)}
                                 </p>
                             </div>
                             <div className="flex items-center gap-1 mt-1">
-                                <MapPinIcon className="size-5 stroke-2 text-[#373737]" />
-                                <p className="text-[11.3px] font-semibold text-[#373737]">
+                                <MapPinIcon className="size-5 stroke-2 text-gray-200" />
+                                <p className="text-[11.3px] font-semibold text-gray-200">
                                     {event.venue}
                                 </p>
                             </div>

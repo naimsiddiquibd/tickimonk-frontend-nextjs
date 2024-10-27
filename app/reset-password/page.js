@@ -55,8 +55,8 @@ const ResetPasswordPage = () => {
     return (
         <div className='h-full lg:h-screen lg:pt-28 pt-24 pb-10 mx-5'>
             <div className='flex justify-center items-center'>
-                <div className='w-[500px] bg-white p-7 rounded-md'>
-                    <p className='text-center font-bold text-gray-500'>Reset Password</p>
+                <div className='w-[500px] bg-white opacity-10 p-7 rounded-md'>
+                    <p className='text-center font-bold text-gray-200'>Reset Password</p>
                     <p className='text-center text-xs font-semibold text-gray-400 mt-3 mb-4'>
                         Enter your new password below.
                     </p>
@@ -72,7 +72,7 @@ const ResetPasswordPage = () => {
                             <input
                                 type="password"
                                 placeholder="New Password"
-                                className="input outline-none focus:no-underline w-full max-w-xl bg-slate-100"
+                                className="input outline-none focus:no-underline w-full max-w-xl bg-slate-100 opacity-15"
                                 value={newPassword}
                                 onChange={(e) => setNewPassword(e.target.value)}
                                 required

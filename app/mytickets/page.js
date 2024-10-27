@@ -48,7 +48,7 @@ const MyTickets = () => {
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center h-screen bg-slate-100">
+            <div className="flex justify-center items-center h-screen">
                 <p>Loading...</p>
             </div>
         );
@@ -63,7 +63,7 @@ const MyTickets = () => {
     return (
         <div className='pt-28 lg:mx-28 mx-5 2xl:mx-96 pb-16 min-h-screen h-full'>
             <div className='flex justify-start items-center gap-2'>
-                <div className="breadcrumbs text-sm text-gray-400">
+                <div className="breadcrumbs text-sm text-gray-300">
                     <ul>
                         <li><a>Home</a></li>
                         <li><a>My Tickets</a></li>
@@ -72,9 +72,10 @@ const MyTickets = () => {
             </div>
             <div className="overflow-x-auto mt-4">
                 <table className="table">
-                    <thead className='bg-[#eeeaea] text-gray-500'>
+                    <thead className='bg-white bg-opacity-15 text-gray-200'>
                         <tr className='border-0'>
                             <th>Event</th>
+                            <th>Organizer</th>
                             <th>Status</th>
                             <th>Start Date</th>
                             <th>End Date</th>
@@ -100,22 +101,27 @@ const MyTickets = () => {
                                                 </div>
                                             </div>
                                             <div>
-                                                <div className="font-semibold text-xs text-gray-500">{ticket?.eventName}</div>
-                                                <div className="text-xs opacity-50 text-gray-500">{ticket?.organizer}</div>
+                                                <div className="font-semibold text-xs text-gray-200">{ticket?.eventName}</div>
+                                                <div className="text-xs opacity-50 text-gray-200">{ticket?.organizer}</div>
                                             </div>
                                         </div>
                                     </Link>
                                 </td>
-                                <td className='font-semibold text-xs text-gray-500'>
-                                    {getStatus(ticket?.endDateTime)}
+                                <td className='font-semibold text-xs text-gray-200'>
+                                    {ticket?.status}
                                 </td>
-                                <td className='font-semibold text-xs text-gray-500'>
-                                    {formatDateTime(ticket?.startDateTime)}
+                                <td className='font-semibold text-xs text-gray-200'>
+                                    {getStatus(ticket?.endDate)}
                                 </td>
-                                <td className='font-semibold text-xs text-gray-500'>
-                                    {formatDateTime(ticket?.endDateTime)}
+                                <td className='font-semibold text-xs text-gray-200'>
+                                    {ticket?.startDate}<br></br>
+                                    {ticket?.startTime}
                                 </td>
-                                <td className='font-semibold text-xs text-gray-500'>
+                                <td className='font-semibold text-xs text-gray-200'>
+                                {ticket?.endDate}<br></br>
+                                {ticket?.endTime}
+                                </td>
+                                <td className='font-semibold text-xs text-gray-200'>
                                     <Link href={`/mytickets/${ticket._id}`}>
                                         <p className='text-[12px] bg-[#E61D64] btn border-0 rounded-md text-white font-medium px-3 min-h-9 h-9 hover:bg-[#ba4870]'>
                                             View Ticket

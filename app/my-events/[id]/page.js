@@ -52,7 +52,7 @@ const Page = ({ params }) => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-slate-100">
+      <div className="flex justify-center items-center h-screen">
         <p>Loading...</p>
       </div>
     );
@@ -101,9 +101,9 @@ const Page = ({ params }) => {
 
   return (
     <div>
-      <div className="lg:mx-28 mx-5 2xl:mx-96 lg:h-screen h-full pt-32 lg:px-28 pb-16">
+      <div className="lg:mx-28 mx-5 2xl:mx-96 lg:min-h-screen h-full pt-32 lg:px-28 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-7 gap-5">
-          <div className="bg-[#261E62] p-4 rounded-md lg:col-span-2 max-h-80">
+          <div className="bg-white bg-opacity-10 p-4 rounded-md lg:col-span-2 max-h-80">
             <div className="h-[180px] lg:h-[215px] w-full">
               <Image
                 src={event.thumbnail}
@@ -133,22 +133,22 @@ const Page = ({ params }) => {
           <div className="lg:col-span-3">
             <div className="gap-0 rounded-b-md">
               <h2
-                className={`text-gray-800 font-bold text-4xl uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}
+                className={`text-gray-200 font-bold text-4xl uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}
               >
                 {event?.eventName}
               </h2>
-              <p className="text-[#373737] text-lg mb-5">@ {organizerName}</p>
+              <p className="text-gray-300 text-lg mb-5">@ {organizerName}</p>
               <div className="flex items-center gap-1 mt-2">
-                <CalendarIcon className="size-6 stroke-2 text-[#373737]" />
+                <CalendarIcon className="size-6 stroke-2 text-gray-300" />
                 <p
-                  className={`text-[#373737] font-bold text-lg ${Inria?.className} style={{ fontWeight: 700 }}`}
+                  className={`text-gray-300 font-bold text-lg ${Inria?.className} style={{ fontWeight: 700 }}`}
                 >
                   {new Date(event.startDateTime).toLocaleString()}
                 </p>
               </div>
               <div className="flex items-center gap-1 mt-1">
-                <MapPinIcon className="size-6 stroke-2 text-[#373737]" />
-                <p className="text-lg  text-[#373737]">{event?.venue}</p>
+                <MapPinIcon className="size-6 stroke-2 text-gray-300" />
+                <p className="text-lg  text-gray-300">{event?.venue}</p>
               </div>
               <div className="card-actions justify-between items-center bg-gray-200 rounded-sm mt-5 py-[10px] px-[10px]">
                 <p
@@ -163,6 +163,41 @@ const Page = ({ params }) => {
                   Ask for a Modification
                 </button>
               </div>
+              <div className="mt-10">
+                <div>
+                  <h3 className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>CONTENT</h3>
+                </div>
+                <div>
+                  <p className="text-base mt-1 text-gray-300">{event?.description}</p>
+                </div>
+              </div>
+              <div className="mt-4">
+                <div>
+                  <h3 className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>SPECIAL INSTRUCTIONS</h3>
+                </div>
+                <div>
+                  <p className="text-base mt-1 text-gray-300">{event?.specialInstructions}</p>
+                </div>
+              </div>
+              <div className="mt-4">
+                <div>
+                  <h3 className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>AGE RESTRICTION</h3>
+                </div>
+                <div>
+                  <p className="text-base mt-1 text-gray-300">
+                    {event?.ageRestriction ? "Yes! Participants must be adult 18+" : "No age restriction"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <div>
+                  <h3 className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>DRESS CODE</h3>
+                </div>
+                <div>
+                  <p className="text-base mt-1 text-gray-300">{event?.dressCode}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -171,12 +206,12 @@ const Page = ({ params }) => {
       {/* Popup form */}
       {isPopupOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg max-w-lg w-full">
+          <div className="bg-white bg-opacity-90 p-6 rounded-lg max-w-lg w-full">
             <h3 className="text-xl font-bold mb-4 text-gray-800">Ask for a Modification</h3>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <textarea
-                  className="w-full p-2 border border-gray-300 rounded-md bg-slate-100"
+                  className="w-full p-2 border border-gray-300 rounded-md h-32"
                   placeholder="Write the changes you want..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
@@ -186,14 +221,14 @@ const Page = ({ params }) => {
               <div className="flex justify-end gap-2">
                 <button
                   type="button"
-                  className="bg-gray-400 text-white px-4 py-2 rounded-md"
+                  className="bg-gray-400 text-white px-4 py-1 rounded-md"
                   onClick={handleClosePopup}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-red-600 text-white px-4 py-2 rounded-md"
+                  className="bg-red-600 text-white px-4 py-1 rounded-md"
                 >
                   Submit
                 </button>

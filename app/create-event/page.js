@@ -1,15 +1,19 @@
+
 "use client";
 
 import React, { useState, useEffect } from "react";
 import { createEvent } from "@/utils/actions/createEvent";
-import EventDetailsStep from "./Stepts/EventDetailsStep";
-import EventScheduleStep from "./Stepts/EventScheduleStep";
-import EventSettingsStep from "./Stepts/EventSettingsStep";
-import EventDescriptionStep from "./Stepts/EventDescriptionStep";
-import EventMediaStep from "./Stepts/EventMediaStep.";
 import { changeUserRole } from "@/utils/actions/changeUserRole";
 import { fetchCurrentUser } from "@/utils/actions/fetchCurrentUser";
 import { signOut } from "next-auth/react";
+import { PhotoIcon, ArrowUpTrayIcon, GlobeAltIcon, ClockIcon, MapPinIcon, NewspaperIcon, CurrencyBangladeshiIcon, LinkSlashIcon, ArrowUturnUpIcon, ScissorsIcon, PencilSquareIcon, TableCellsIcon } from '@heroicons/react/24/solid'
+import Ball from '../../public/ball-category.png';
+import StartEndIcon from '../../public/start-end.png';
+import Image from "next/image";
+import timezones from "@/constant/timezones";
+import Modal from "../components/Modal";
+
+
 
 const EventForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -17,33 +21,28 @@ const EventForm = () => {
     eventName: "",
     eventCategory: "",
     venue: "",
-    startDateTime: "",
-    endDateTime: "",
+    startDate: "",
+    startTime: "",
+    endDate: "",
+    endTime: "",
     timezone: "",
     recurringEvent: false,
-    ageRestriction: "All Ages",
+    ageRestriction: false,
     dressCode: "",
+    eventStatus: "",
     description: "",
     specialInstructions: "",
     price: "",
-    logo: null,
+    eventLogo: null,
     thumbnail: null,
   });
 
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ text: "", type: "" });
-
-  const [user, setUser] = useState(null); // State to hold user data
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedLogo, setSelectedLogo] = useState(null);
+  const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
-
-  const handleChange = (e) => {
-    const { name, type, value, checked, files } = e.target;
-
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: type === "file" ? files[0] : type === "checkbox" ? checked : value,
-    }));
-  };
 
   useEffect(() => {
     const getCurrentUser = async () => {
@@ -61,6 +60,17 @@ const EventForm = () => {
   }, []);
 
   console.log("User role from current api:", user?.role);
+
+
+  const handleChange = (e) => {
+    const { name, type, value, checked, files } = e.target;
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === "file" ? files[0] : type === "checkbox" ? checked : value,
+    }));
+  };
+
 
   const handleSubmit = async () => {
     setLoading(true); // Start loading when submitting
@@ -106,105 +116,446 @@ const EventForm = () => {
     }
   };
 
-  const validateStep = () => {
-    switch (currentStep) {
-      case 1:
-        return formData.eventName.trim() !== "";
-      case 2:
-        return formData.startDateTime.trim() !== "" && formData.endDateTime.trim() !== "";
-      case 3:
-        return formData.ageRestriction.trim() !== "" && formData.dressCode.trim() !== "";
-      case 4:
-        return formData.description.trim() !== "";
-      case 5:
-        return formData.logo !== null && formData.thumbnail !== null;
-      default:
-        return true;
+
+
+  // Update the handleImageChange function to store the file in formData
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setSelectedImage(imageUrl);
+
+      // Update the formData to include the file as thumbnail
+      setFormData((prevData) => ({
+        ...prevData,
+        thumbnail: file,
+      }));
     }
   };
 
-  const handleNext = () => {
-    if (validateStep()) {
-      setCurrentStep((prevStep) => prevStep + 1);
-    } else {
-      setMessage({ text: "Please fill all required fields before proceeding.", type: "error" });
+  // Update the handleLogoChange function to store the file in formData
+  const handleLogoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const logoUrl = URL.createObjectURL(file);
+      setSelectedLogo(logoUrl);
+
+      // Update the formData to include the file as logo
+      setFormData((prevData) => ({
+        ...prevData,
+        eventLogo: file,
+      }));
     }
   };
 
-  const handlePrev = () => setCurrentStep((prevStep) => prevStep - 1);
+  const [selectedTimezone, setSelectedTimezone] = useState({ offset: 'GMT+06:00', location: 'Dhaka' });
+
+  const handleTimezoneChange = (event) => {
+    const selected = timezones.find(tz => tz.offset === event.target.value);
+    setSelectedTimezone(selected);
+
+    setFormData((prevData) => ({
+      ...prevData,
+      timezone: selected.location, // Update the timezone in formData
+    }));
+  };
+
+  const [popupState, setPopupState] = useState({
+    field: null,
+    isOpen: false,
+  });
+
+  const handleOpenPopup = (field) => {
+    setPopupState({ field, isOpen: true });
+  };
+
+  const handleClosePopup = () => {
+    setPopupState({ field: null, isOpen: false });
+  };
+
+  const handleSavePopup = (value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [popupState.field]: value,
+    }));
+    handleClosePopup();
+  };
+
+  const handleDateChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const [category, setCategory] = useState("Event");
+  const [status, setStatus] = useState("Public");
+
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+    setCategory(selectedCategory);
+
+    setFormData((prevData) => ({
+      ...prevData,
+      eventCategory: selectedCategory, // Update the eventCategory in formData
+    }));
+  };
+
+  const handleStatusChange = (e) => {
+    const selectedStatus = e.target.value;
+    setStatus(selectedStatus);
+
+    setFormData((prevData) => ({
+      ...prevData,
+      eventStatus: selectedStatus, // Update the eventCategory in formData
+    }));
+  };
+
+  const handleToggleChange = (e) => {
+    const { name, checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: checked,
+    }));
+  };
 
   return (
-    <div className="pt-28 lg:mx-28 mx-5 2xl:mx-96 pb-16 lg:h-screen h-full">
-      <div className='flex justify-start items-center gap-2'>
-        <div className="breadcrumbs text-sm text-gray-400">
-          <ul>
-            <li><a>Home</a></li>
-            <li><a>My Tickets {user?.name}</a></li>
-          </ul>
-        </div>
-      </div>
-      <div className="max-w-4xl mx-auto p-8 shadow-sm rounded-md lg:w-[500px] w-full bg-white">
-        <p className="text-center font-bold text-gray-500">Create Event</p>
-        <p className="text-center text-xs font-semibold text-gray-400 mt-3 mb-4">
-          Follow the steps to create your event.
-        </p>
-        {message.text && (
-          <div
-            className={`mt-4 text-center ${message.type === "success" ? "text-green-500" : "text-red-500"
-              }`}
-          >
-            {message.text}
+    <div className="bg-[#112D59] h-full lg:min-h-screen lg:pb-20">
+
+      <div className="lg:pt-32 pt-28 lg:mx-72 mx-5 2xl:mx-96 pb-16 lg:h-screen h-full">
+        <div className="grid lg:grid-cols-3 gap-5">
+
+          <div className="lg:col-span-1">
+
+            {/* Thumbnail */}
+            <div className=" relative w-full h-80 bg-gray-200 rounded-lg overflow-hidden shadow-sm flex items-center justify-center">
+              {/* Default or Selected Image */}
+              <img
+                src={
+                  selectedImage ||
+                  "https://i.ibb.co.com/9y5WWhz/626f4fb1-f399-46ca-b0a4-e80420d0cc44-1.png" // Default image URL
+                }
+                alt="Uploaded"
+                className="w-full h-full object-cover"
+              />
+
+              {/* Upload Button */}
+              <label className="absolute bottom-2 right-2 bg-white text-white text-sm py-2 px-2 rounded-full cursor-pointer hover:bg-[#112D59] border-2 border-gray-700 hover:border-white">
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleImageChange}
+                />
+                <PhotoIcon className="size-5 text-gray-600 hover:text-white" />
+              </label>
+            </div>
+
+            {/* Logo */}
+            <div className="bg-white bg-opacity-10 hover:bg-opacity-15 p-2 rounded-md mt-4">
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gray-200 rounded-lg overflow-hidden shadow-sm flex items-center justify-center">
+                    {/* Default or Selected Image */}
+                    <img
+                      src={
+                        selectedLogo ||
+                        "https://i.ibb.co.com/9y5WWhz/626f4fb1-f399-46ca-b0a4-e80420d0cc44-1.png" // Default image URL
+                      }
+                      alt="Uploaded"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-white text-sm ">{category || "Event"}</p>
+                    <h5 className="text-white text-md font-semibold">{formData.eventName || "Event Name"}</h5>
+                  </div>
+                </div>
+                <label className="cursor-pointer">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleLogoChange}
+                  />
+                  <ArrowUpTrayIcon className="size-5 text-white hover:text-white" />
+                </label>
+              </div>
+            </div>
+
           </div>
-        )}
 
-        {loading && <p className="text-center text-gray-500">Loading...</p>} {/* Loading indicator */}
 
-        {!loading && currentStep === 1 && (
-          <EventDetailsStep formData={formData} handleChange={handleChange} />
-        )}
-        {!loading && currentStep === 2 && (
-          <EventScheduleStep formData={formData} handleChange={handleChange} />
-        )}
-        {!loading && currentStep === 3 && (
-          <EventSettingsStep formData={formData} handleChange={handleChange} />
-        )}
-        {!loading && currentStep === 4 && (
-          <EventDescriptionStep formData={formData} handleChange={handleChange} />
-        )}
-        {!loading && currentStep === 5 && (
-          <EventMediaStep formData={formData} handleChange={handleChange} />
-        )}
+          <div className="lg:col-span-2">
+            <div className="flex justify-between items-center">
 
-        <div className="flex justify-end mt-6 gap-3">
-          {currentStep > 1 && (
-            <button
-              type="button"
-              onClick={handlePrev}
-              className="bg-gray-300 text-gray-900 px-12 py-3 rounded-sm"
-              disabled={loading} // Disable buttons while loading
-            >
-              Previous
-            </button>
-          )}
-          {currentStep < 5 ? (
-            <button
-              type="button"
-              onClick={handleNext}
-              className="bg-[#E61D64] text-white px-12 py-3 rounded-sm"
-              disabled={loading} // Disable buttons while loading
-            >
-              Next
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={handleSubmit}
-              className="bg-[#E61D64] text-white px-12 py-3 rounded-sm"
-              disabled={loading} // Disable buttons while loading
-            >
-              Submit
-            </button>
-          )}
+              {/* Category */}
+              <div>
+                <div className="relative w-full max-w-xs">
+                  {/* Left icon */}
+                  <Image
+                    src={Ball}
+                    width={14}
+                    height={14}
+                    alt="Logo"
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2"
+                  />
+                  {/* Select dropdown */}
+                  <select
+                    value={category}
+                    onChange={handleCategoryChange}
+                    className="select pl-8 pr-8 bg-white bg-opacity-10 border-0 hover:bg-opacity-100 hover:bg-white hover:text-[#112D59] text-white h-8 min-h-8 rounded-md">
+                    <option value="Event">Event</option>
+                    <option value="Course">Course</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Status */}
+              <div>
+                <div className="relative w-full max-w-xs">
+                  {/* Left icon */}
+                  <GlobeAltIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 size-4 text-yellow-500" />
+                  {/* Select dropdown */}
+                  <select
+                    value={status}
+                    onChange={handleStatusChange}
+                    className="select pl-8 pr-8 bg-white bg-opacity-10 border-0 hover:bg-opacity-100 hover:bg-white hover:text-[#112D59] text-white h-8 min-h-8 rounded-md">
+                    <option value="Public" selected>Public</option>
+                    <option value="Draft" >Draft</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Event Name */}
+            <div>
+              <input
+                type="text"
+                placeholder="Event Name"
+                id="eventName"
+                name="eventName"
+                value={formData.eventName}
+                onChange={handleChange}
+                className="input w-full max-full border-none bg-opacity-0 focus:outline-none placeholder-gray-400 lg:text-4xl text-2xl font-semibold p-0 mt-4"
+              />
+            </div>
+
+
+            <div className="mt-4 grid lg:grid-cols-4 gap-3">
+
+              {/* Start & End date */}
+              <div className="bg-white bg-opacity-10 p-2 flex items-center justify-between rounded-md lg:col-span-3">
+
+                <div className="flex items-center gap-2">
+                  <div>
+                    <Image
+                      src={StartEndIcon}
+                      width={14}
+                      height={14}
+                      alt="Logo"
+                      className=""
+                    />
+                  </div>
+                  <div className="text-sm text-white grid grid-cols-1 gap-4 content-between h-full">
+                    <div>Start</div>
+                    <div>End</div>
+                  </div>
+                </div>
+
+
+                <div className="flex flex-col gap-1">
+                  {/* Start date */}
+                  <div className="flex items-center gap-0.5 text-sm">
+                    <input
+                      type="date"
+                      name="startDate"
+                      value={formData.startDate}
+                      onChange={handleDateChange}
+                      className="bg-white bg-opacity-20 text-white pl-2 pr-3 rounded-l-md py-1"
+                    />
+
+                    <input
+                      type="time"
+                      name="startTime"
+                      value={formData.startTime}
+                      onChange={handleDateChange}
+                      className="bg-white bg-opacity-20 text-white px-2 rounded-r-md py-1"
+                    />
+                  </div>
+                  {/* End date */}
+                  <div className="flex items-center gap-0.5 text-sm">
+                    <input
+                      type="date"
+                      name="endDate"
+                      value={formData.endDate}
+                      onChange={handleDateChange}
+                      className="bg-white bg-opacity-20 text-white pl-2 pr-3 rounded-l-md py-1"
+                    />
+                    <input
+                      type="time"
+                      name="endTime"
+                      value={formData.endTime}
+                      onChange={handleDateChange}
+                      className="bg-white bg-opacity-20 text-white px-2 rounded-r-md py-1"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Time zone */}
+              <div className="lg:col-span-1 bg-white bg-opacity-10 p-2 flex flex-col items-start justify-between rounded-md">
+                <ClockIcon className="size-4 text-gray-300" />
+                <select
+                  className="bg-transparent text-white text-sm font-medium outline-none appearance-none"
+                  onChange={handleTimezoneChange}
+                  value={selectedTimezone.offset}
+                >
+                  {timezones.map((tz, index) => (
+                    <option key={index} value={tz.offset}>
+                      {tz.location}
+                    </option>
+                  ))}
+                </select>
+                {/* <p className="font-medium">{selectedTimezone.offset}</p> */}
+                <p className="text-xs">{selectedTimezone.offset}</p>
+              </div>
+
+            </div>
+
+            {/* Event Location */}
+            <div className="mt-3">
+              <div>
+                <div className="bg-white bg-opacity-10 p-2 flex items-center justify-start gap-2 rounded-md cursor-pointer"
+                  onClick={() => handleOpenPopup("venue")}>
+                  <MapPinIcon className="size-4 text-gray-300" />
+                  <p className="font-bold text-sm text-white">Add Event Location</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Event Description */}
+            <div className="mt-3">
+              <div onClick={() => handleOpenPopup("description")} className="bg-white cursor-pointer bg-opacity-10 p-2 flex items-center justify-start gap-2  rounded-md">
+                <NewspaperIcon className="size-4 text-gray-300" />
+                <p className="font-bold text-sm text-white">Add Description</p>
+              </div>
+            </div>
+
+            {/* Special Instruction*/}
+            <div className="mt-3">
+              <div onClick={() => handleOpenPopup("specialInstructions")} className="bg-white cursor-pointer bg-opacity-10 p-2 flex items-center justify-start gap-2  rounded-md">
+                <TableCellsIcon className="size-4 text-gray-300" />
+                <p className="font-bold text-sm text-white">Special Instruction</p>
+              </div>
+            </div>
+
+
+            <div>
+              <p className="text-sm text-white font-semibold mt-4 mb-2">Event Options</p>
+              <div className="bg-white bg-opacity-10 p-2 rounded-md mt-1 py-3">
+
+                {/* Event Price */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-start gap-2">
+                    <div>
+                      <CurrencyBangladeshiIcon className="size-4 text-gray-300" />
+                    </div>
+                    <div className="text-sm text-white">Price</div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <p className="text-sm font-medium text-gray-300 ">Currency BDT</p>
+                    <PencilSquareIcon onClick={() => handleOpenPopup("price")} className="cursor-pointer size-6 text-gray-300 mr-1" />
+                  </div>
+                </div>
+
+                <div className="divider mt-1 mb-1"></div>
+
+                {/* Age Restriction */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-start gap-2">
+                    <div>
+                      <ScissorsIcon className="size-4 text-gray-300" />
+                    </div>
+                    <div className="text-sm text-white">Age Restriction</div>
+                  </div>
+                  <div>
+                    <div className="form-control">
+                      <label className="label cursor-pointer">
+                        <input
+                          type="checkbox"
+                          name="ageRestriction"
+                          checked={formData.ageRestriction}
+                          onChange={handleToggleChange}
+                          className="toggle toggle-primary" defaultChecked />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div className="divider mt-1 mb-1"></div>
+                {/* Recurring Event */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-start gap-2">
+                    <div>
+                      <ArrowUturnUpIcon className="size-4 text-gray-300" />
+                    </div>
+                    <div className="text-sm text-white">Recurring Event</div>
+                  </div>
+                  <div>
+                    <div className="form-control">
+                      <label className="label cursor-pointer">
+                        <input
+                          type="checkbox"
+                          name="recurringEvent"
+                          checked={formData.recurringEvent}
+                          onChange={handleToggleChange}
+                          className="toggle toggle-primary" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div className="divider mt-1 mb-1"></div>
+
+                {/* Dress Code */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-start gap-2">
+                    <div>
+                      <LinkSlashIcon className="size-4 text-gray-300" />
+                    </div>
+                    <div className="text-sm text-white">Dress Code</div>
+                  </div>
+                  <div className="flex items-center gap-3 font-medium">
+                    <p className="text-sm text-gray-300">Keep it black if not needed</p>
+                    <PencilSquareIcon onClick={() => handleOpenPopup("dressCode")} className="cursor-pointer size-6 text-gray-300 mr-1" />
+                  </div>
+                </div>
+              </div>
+              {popupState.isOpen && (
+                <Modal
+                  title={`Add ${popupState.field}`}
+                  value={formData[popupState.field]}
+                  onSave={handleSavePopup}
+                  onClose={handleClosePopup}
+                />
+              )}
+
+              <div>
+                {loading && <p className="text-center mt-2 text-white">Loading...</p>}
+                {message.text && (
+                  <p className={`text-center mt-4 ${message.type === "error" ? "text-red-500" : "text-green-500"}`}>
+                    {message.text}
+                  </p>
+                )}
+                <div disabled={loading} onClick={handleSubmit} className="bg-white p-3 rounded-md mt-8 hover:bg-slate-200 cursor-pointer">
+                  <p className="text-[#112D59] text-sm text-center font-semibold">{loading ? "Creating Event..." : "Create Event"}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

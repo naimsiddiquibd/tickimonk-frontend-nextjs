@@ -80,7 +80,7 @@ const QRCodeScanner = () => {
 
     return (
         <div className=' min-h-screen pt-28 pb-16 lg:mx-28 mx-5 2xl:mx-96'>
-            <div className="breadcrumbs text-sm text-gray-400">
+            <div className="breadcrumbs text-sm text-gray-200">
                 <ul>
                     <li><a>Home</a></li>
                     <li><a>Ticket Checking</a></li>
@@ -98,7 +98,7 @@ const QRCodeScanner = () => {
                     )}
                 </div>
 
-                {loading && <p className="text-gray-500">Loading ticket information...</p>}
+                {loading && <p className="text-gray-200">Loading ticket information...</p>}
 
                 {ticketData ? (
                     <div className='w-96'>

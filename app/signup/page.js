@@ -45,9 +45,9 @@ const SignupPage = () => {
     return (
         <div className="h-full lg:h-screen lg:pt-28 pt-24 pb-10  mx-5">
             <div className="flex justify-center items-center">
-                <div className="w-[500px] bg-white p-7 rounded-lg">
-                    <p className="text-center font-bold text-gray-800">Signup</p>
-                    <p className="text-center text-xs font-semibold text-gray-800 mt-3 mb-4">
+                <div className="w-[500px] bg-white bg-opacity-10 p-7 rounded-lg">
+                    <p className="text-center font-bold text-gray-200">Signup</p>
+                    <p className="text-center text-xs font-semibold text-gray-200 mt-3 mb-4">
                         Welcome to the Ticketing System! Log in to purchase tickets or
                         create and manage events with ease. Sign in to get started!
                     </p>
@@ -57,12 +57,12 @@ const SignupPage = () => {
                         <div className="lg:flex grid grid-cols-1 items-center gap-2 mt-1">
                             <label className="form-control w-full max-w-xl">
                                 <div className="label">
-                                    <span className="label-text text-gray-800">Name</span>
+                                    <span className="label-text text-gray-200">Name</span>
                                 </div>
                                 <input
                                     type="text"
                                     placeholder="Type here"
-                                    className="input text-xs outline-none focus:no-underline w-full  max-w-xl bg-slate-100"
+                                    className="input text-xs outline-none focus:no-underline w-full  max-w-xl bg-slate-100 bg-opacity-10"
                                     {...register("name", { required: true })}
                                 />
                                 {errors.name && (
@@ -71,12 +71,12 @@ const SignupPage = () => {
                             </label>
                             <label className="form-control w-full max-w-xl">
                                 <div className="label">
-                                    <span className="label-text text-gray-800">Email</span>
+                                    <span className="label-text text-gray-200">Email</span>
                                 </div>
                                 <input
                                     type="email"
                                     placeholder="Type here"
-                                    className="input text-xs outline-none focus:no-underline w-full max-w-xl bg-slate-100"
+                                    className="input text-xs outline-none focus:no-underline w-full max-w-xl bg-slate-100 bg-opacity-10"
                                     {...register("email", { required: true })}
                                 />
                                 {errors.email && (
@@ -87,12 +87,12 @@ const SignupPage = () => {
                         <div className="lg:flex grid grid-cols-1 items-center gap-2 mt-1">
                             <label className="form-control w-full max-w-xl">
                                 <div className="label">
-                                    <span className="label-text text-gray-800">Phone Number</span>
+                                    <span className="label-text text-gray-200">Phone Number</span>
                                 </div>
                                 <input
                                     type="tel"
                                     placeholder="Type here"
-                                    className="input text-xs outline-none focus:no-underline w-full max-w-xl bg-slate-100"
+                                    className="input text-xs outline-none focus:no-underline w-full max-w-xl bg-slate-100 bg-opacity-10"
                                     {...register("phoneNumber", { required: true })}
                                 />
                                 {errors.phoneNumber && (
@@ -101,12 +101,12 @@ const SignupPage = () => {
                             </label>
                             <label className="form-control w-full max-w-xl">
                                 <div className="label">
-                                    <span className="label-text text-gray-800">NID</span>
+                                    <span className="label-text text-gray-200">NID</span>
                                 </div>
                                 <input
                                     type="text"
                                     placeholder="Type here"
-                                    className="input text-xs outline-none focus:no-underline w-full max-w-xl bg-slate-100"
+                                    className="input text-xs outline-none focus:no-underline w-full max-w-xl bg-slate-100 bg-opacity-10"
                                     {...register("nid", { required: true })}
                                 />
                                 {errors.nid && (
@@ -117,12 +117,12 @@ const SignupPage = () => {
                         <div className="lg:flex grid grid-cols-1 items-center gap-2 mt-1">
                             <label className="form-control w-full max-w-xl">
                                 <div className="label">
-                                    <span className="label-text text-gray-800">Password</span>
+                                    <span className="label-text text-gray-200">Password</span>
                                 </div>
                                 <input
                                     type="password"
                                     placeholder="Type here"
-                                    className="input text-xs outline-none focus:no-underline w-full max-w-xl bg-slate-100"
+                                    className="input text-xs outline-none focus:no-underline w-full max-w-xl bg-slate-100 bg-opacity-10"
                                     {...register("password", { required: true })}
                                 />
                                 {errors.password && (
@@ -131,12 +131,12 @@ const SignupPage = () => {
                             </label>
                             <label className="form-control w-full max-w-xl">
                                 <div className="label">
-                                    <span className="label-text text-gray-800">Confirm Password</span>
+                                    <span className="label-text text-gray-200">Confirm Password</span>
                                 </div>
                                 <input
                                     type="password"
                                     placeholder="Type here"
-                                    className="input text-xs outline-none focus:no-underline w-full max-w-xl bg-slate-100"
+                                    className="input text-xs outline-none focus:no-underline w-full max-w-xl bg-slate-100 bg-opacity-10"
                                     {...register("confirmPassword", { required: true })}
                                 />
                                 {errors.confirmPassword && (
@@ -152,7 +152,7 @@ const SignupPage = () => {
                                         className="checkbox"
                                         {...register("terms", { required: true })}
                                     />
-                                    <p className="label-text text-sm text-gray-800">
+                                    <p className="label-text text-sm text-gray-200">
                                         Agree to the{" "}
                                         <Link href="terms-condition" className="text-[#E61D64]">Terms and Conditions</Link>
                                     </p>
@@ -175,7 +175,7 @@ const SignupPage = () => {
                             </button>
                         </div>
                     </form>
-                    <p className="text-center text-xs font-semibold text-gray-800 mt-8">
+                    <p className="text-center text-xs font-semibold text-gray-200 mt-8">
                         Don’t have an account yet? Please
                         <Link href="login">
                             <span className="text-[#E61D64]"> Login</span>

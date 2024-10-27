@@ -12,10 +12,12 @@ export default function Home() {
 
     return (
         <div>
-            <Hero></Hero>
-            <div className="lg:mx-28 mx-5 2xl:mx-96">
-                <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+            {/* <Hero></Hero> */}
+            <div className="lg:mx-28 mx-5 2xl:mx-96 pt-28 pb-10">
+                {/* <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} /> */}
                 <TicketCard searchQuery={searchQuery} />
+                <GetStarted></GetStarted>
+            <Footer></Footer>
             </div>
         </div>
     );

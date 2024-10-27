@@ -9,8 +9,8 @@ const EventDetailsStep = ({ formData, handleChange }) => (
         id="eventName"
         name="eventName"
         value={formData.eventName}
-        className="bg-white p-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         onChange={handleChange}
+        className="bg-white p-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         required
       />
     </div>

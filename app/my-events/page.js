@@ -49,7 +49,7 @@ const TicketCard = () => {
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center h-screen bg-slate-100">
+            <div className="flex justify-center items-center h-screen">
                 <p>Loading...</p>
             </div>
         );
@@ -76,7 +76,7 @@ const TicketCard = () => {
     };
 
     return (
-        <div className='pt-28 h-full lg:min-h-screen lg:mx-28 mx-5 2xl:mx-96'>
+        <div className='pt-28 pb-16 h-full lg:min-h-screen lg:mx-28 mx-5 2xl:mx-96'>
             <div className='flex justify-start items-center gap-2'>
                 <div className="breadcrumbs text-sm text-gray-400">
                     <ul>
@@ -181,7 +181,7 @@ const TicketCard = () => {
                         //         </div>
                         //     </div>
                         // </div>
-                        <div className="card card-compact bg-base-100 w-full shadow-sm rounded-md">
+                        <div className="card card-compact w-full shadow-sm rounded-md">
                             <figure className="relative">
                                 <Image
                                     src={event?.thumbnail}
@@ -195,19 +195,19 @@ const TicketCard = () => {
                                     {event.eventCategory}
                                 </button>
                             </figure>
-                            <div className="card-body bg-white gap-0 rounded-b-md">
-                                <Link href={`my-events/${event._id}`} className={`text-gray-800 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>
+                            <div className="card-body bg-white bg-opacity-10 gap-0 rounded-b-md">
+                                <Link href={`my-events/${event._id}`} className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>
                                     {event.eventName}
                                 </Link>
                                 <div className="flex items-center gap-1 mt-2">
-                                    <CalendarIcon className="size-5 stroke-2 text-[#373737]" />
-                                    <p className={`text-[#373737] font-bold text-[11.3px] ${Inria?.className} style={{ fontWeight: 700 }}`}>
+                                    <CalendarIcon className="size-5 stroke-2 text-gray-200" />
+                                    <p className={`text-gray-200 font-bold text-[11.3px] ${Inria?.className} style={{ fontWeight: 700 }}`}>
                                         {formatDateTime(event?.startDateTime)}
                                     </p>
                                 </div>
                                 <div className="flex items-center gap-1 mt-1">
-                                    <MapPinIcon className="size-5 stroke-2 text-[#373737]" />
-                                    <p className="text-[11.3px] font-semibold text-[#373737]">
+                                    <MapPinIcon className="size-5 stroke-2 text-gray-200" />
+                                    <p className="text-[11.3px] font-semibold text-gray-200">
                                         {event.venue}
                                     </p>
                                 </div>

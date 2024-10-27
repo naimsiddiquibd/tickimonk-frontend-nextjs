@@ -3,7 +3,6 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import LogoForWhiteBg from '../../public/logo-white.png';
-import LogoForOtherBg from '../../public/logo-black.png';
 import Image from 'next/image';
 
 const navItems = [
@@ -29,27 +28,26 @@ const Inria = Inria_Sans({
 const NewNavBarForTop = ({ session }) => {
     const pathname = usePathname();
 
-    const logo = pathname === '/' ? LogoForWhiteBg : LogoForOtherBg;
+    // Always use the white logo and white styles.
+    const logo = LogoForWhiteBg;
+    const userNameColor = 'text-white font-semibold';
 
     const filteredNavItems = session?.user
         ? navItems.filter(item => !item.requiresOrganizer || session.user.role === 'organizer')
         : guestNavItems;
 
-    // Dynamic color based on pathname
-    const userNameColor = pathname === '/' ? 'text-white font-semibold' : 'text-gray-600 font-semibold';
-
     return (
-        <div className="absolute z-[999999] drawer mb-4 pt-5 lg:px-14 px-5">
+        <div className="absolute z-[999999] drawer mb-4 pt-5 lg:px-12 px-5">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col lg:mx-16">
-                <div className="navbar bg-slate-50 bg-opacity-5 mx-auto w-full rounded-md shadow-sm">
+                <div className="navbar bg-white bg-opacity-10 mx-auto w-full rounded-md shadow-sm">
                     <div className="flex-none lg:hidden">
                         <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost ">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
-                                className="inline-block h-6 w-6 stroke-current text-slate-700">
+                                className="inline-block h-6 w-6 stroke-current text-gray-200">
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -69,19 +67,15 @@ const NewNavBarForTop = ({ session }) => {
                         </Link>
                     </div>
                     <div className="hidden flex-none lg:block navbar-center">
-                    <ul className="menu menu-horizontal">
+                        <ul className="menu menu-horizontal">
                             {/* Dynamic Navbar content */}
                             {filteredNavItems.map(item => (
                                 <li key={item.href}>
                                     <a
                                         href={item.href}
                                         className={`${pathname === item.href
-                                            ? pathname === '/' 
-                                                ? 'text-white font-bold' 
-                                                : 'text-red-600 font-bold'
-                                            : pathname === '/'
-                                                ? 'text-white'
-                                                : 'text-gray-600'} text-base ${Inria.className} style={{ fontWeight: 700 }}`}
+                                                ? 'text-pink-600 font-bold'
+                                                : 'text-gray-200'} text-base ${Inria.className} style={{ fontWeight: 700 }}`}
                                     >
                                         {item.label}
                                     </a>
@@ -121,9 +115,7 @@ const NewNavBarForTop = ({ session }) => {
                         ) : (
                             <Link href="/login">
                                 <div
-                                    className={`px-6 py-2 rounded-sm shadow-sm font-bold ${pathname === '/'
-                                        ? 'bg-white text-[#DE135A]'
-                                        : 'bg-[#DE135A] text-white'} ${Inria.className} style={{ fontWeight: 700 }}`}>
+                                    className="px-6 py-2 rounded-sm shadow-sm font-bold bg-[#DE135A] text-white">
                                     Login
                                 </div>
                             </Link>

@@ -31,9 +31,9 @@ console.log("eita result from login page:", result);
     return (
         <div className='h-full lg:h-screen lg:pt-28 pt-24 pb-10  mx-5'>
             <div className='flex justify-center items-center'>
-                <div className='w-[500px] bg-white p-7 rounded-lg'>
-                    <p className='text-center font-bold text-gray-800'>Login</p>
-                    <p className='text-center text-xs font-semibold text-gray-800 mt-3 mb-4'>
+                <div className='w-[500px] bg-white bg-opacity-10 p-7 rounded-lg'>
+                    <p className='text-center font-bold text-gray-200'>Login</p>
+                    <p className='text-center text-xs font-semibold text-gray-200 mt-3 mb-4'>
                         Welcome to the Ticketing System! Log in to purchase tickets or create and manage events with ease. Sign in to get started!
                     </p>
 
@@ -43,12 +43,12 @@ console.log("eita result from login page:", result);
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <label className="form-control w-full max-w-xl">
                             <div className="label">
-                                <span className="label-text text-gray-800">Email</span>
+                                <span className="label-text text-gray-200">Email</span>
                             </div>
                             <input 
                                 type="text" 
                                 placeholder="Type here" 
-                                className="input outline-none focus:no-underline w-full text-gray-600 max-w-xl bg-slate-100" 
+                                className="input outline-none focus:no-underline w-full text-gray-600 max-w-xl bg-slate-100 bg-opacity-10" 
                                 {...register('email', { required: true })}
                             />
                             {errors.email && <span className="text-red-500">This field is required</span>}
@@ -56,12 +56,12 @@ console.log("eita result from login page:", result);
 
                         <label className="form-control w-full max-w-xl">
                             <div className="label">
-                                <span className="label-text text-gray-800">Password</span>
+                                <span className="label-text text-gray-200">Password</span>
                             </div>
                             <input 
                                 type="password" 
                                 placeholder="Type here" 
-                                className="input outline-none focus:no-underline text-gray-600 w-full max-w-xl bg-slate-100" 
+                                className="input outline-none focus:no-underline text-gray-200 w-full max-w-xl bg-slate-100 bg-opacity-10" 
                                 {...register('password', { required: true })}
                             />
                             {errors.password && <span className="text-red-500">This field is required</span>}
@@ -96,10 +96,10 @@ console.log("eita result from login page:", result);
                     </button> */}
 
                     <Link href="forget-password">
-                        <p className='text-center text-xs font-semibold text-gray-800 mt-4 hover:text-[#E61D64]'>Forgot Password?</p>
+                        <p className='text-center text-xs font-semibold text-gray-200 mt-4 hover:text-[#E61D64]'>Forgot Password?</p>
                     </Link>
 
-                    <p className='text-center text-xs font-semibold text-gray-800 mt-8'>
+                    <p className='text-center text-xs font-semibold text-gray-200 mt-8'>
                         Don’t have an account yet? Please
                         <Link href="signup">
                             <span className='text-[#E61D64]'> Signup</span>

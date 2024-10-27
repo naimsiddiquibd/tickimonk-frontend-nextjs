@@ -69,44 +69,44 @@ const Page = ({ params }) => {
             alert('Event not found');
             return;
         }
-    
+
         // Gather additional required data
         const paymentData = {
-            amount: event.price, 
+            amount: event.price,
             currency: "BDT",
-            product_name: event.eventName, 
-            product_description: event.description, 
-            name: "John Doe", 
-            email: "john.doe@example.com", 
-            phone: "01712345678", 
-            address: "123 Test Street", 
-            city: "Dhaka", 
-            state: "Dhaka", 
-            zipcode: "1000", 
-            country: "BD", 
-            redirect_url: "https://tickimonk.vercel.app/mytickets", 
+            product_name: event.eventName,
+            product_description: event.description,
+            name: "John Doe",
+            email: "john.doe@example.com",
+            phone: "01712345678",
+            address: "123 Test Street",
+            city: "Dhaka",
+            state: "Dhaka",
+            zipcode: "1000",
+            country: "BD",
+            redirect_url: "https://tickimonk.vercel.app/mytickets",
             ipn_url: "https://tickimonk.vercel.app"
         };
-    
+
         try {
             const purchaseResult = await purchaseTicket({ eventId: id, price: event.price });
-    
+
             if (purchaseResult.success) {
                 const ticketId = purchaseResult.data._id;
-    
+
                 // After successful ticket creation, initiate payment
                 const paymentResult = await payForTicket({ ticketId, paymentData });
                 console.log("reeeee:", paymentResult);
                 if (paymentResult.success) {
                     // Redirect to the payment URL from the response if available
                     // const paymentUrl = paymentResult.data.data.action.url; 
-    
+
                     // // Calculate the popup dimensions and position to center it
                     // const popupWidth = 400;
                     // const popupHeight = 618; // Taller for vertical layout
                     // const popupX = (window.screen.width - popupWidth) / 2;
                     // const popupY = (window.screen.height - popupHeight) / 2;
-    
+
                     // // Open the centered popup
                     // window.open(
                     //     paymentUrl,
@@ -126,27 +126,27 @@ const Page = ({ params }) => {
             alert('An error occurred while purchasing the ticket.');
         }
     };
-    
-    
+
+
 
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center h-screen bg-slate-100">
+            <div className="flex justify-center items-center h-screen">
                 <p>Loading...</p>
             </div>
         );
     }
     if (error) {
         return (
-            <div className="flex justify-center items-center h-screen bg-slate-100">
+            <div className="flex justify-center items-center h-screen">
                 <p>Error: {error}</p>
             </div>
         );
     }
     if (!event) {
         return (
-            <div className="flex justify-center items-center h-screen bg-slate-100">
+            <div className="flex justify-center items-center h-screen">
                 <p>Event not found!</p>
             </div>
         );
@@ -217,23 +217,23 @@ const Page = ({ params }) => {
                                 className="object-cover w-full h-full"
                             />
                         </div>
-                       
+
                     </div>
                     <div className="lg:col-span-3">
                         <div className="gap-0 rounded-b-md">
-                            <h2 className={`text-gray-800 font-bold text-4xl uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>
+                            <h2 className={`text-gray-200 font-bold text-4xl uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>
                                 {event?.eventName}
                             </h2>
-                            <p className="text-[#373737] text-lg mb-5">@ {organizerName}</p>
+                            <p className="text-gray-200 text-lg mb-5">@ {organizerName}</p>
                             <div className="flex items-center gap-1 mt-2">
-                                <CalendarIcon className="size-6 stroke-2 text-[#373737]" />
-                                <p className={`text-[#373737] font-bold text-lg ${Inria?.className} style={{ fontWeight: 700 }}`}>
-                                    {formatDateTime(event?.startDateTime)}
+                                <CalendarIcon className="size-6 stroke-2 text-gray-300" />
+                                <p className={`text-gray-200 font-bold text-lg ${Inria?.className} style={{ fontWeight: 700 }}`}>
+                                    {event?.startDate} | {event?.startTime}
                                 </p>
                             </div>
                             <div className="flex items-center gap-1 mt-1">
-                                <MapPinIcon className="size-6 stroke-2 text-[#373737]" />
-                                <p className="text-lg  text-[#373737]">
+                                <MapPinIcon className="size-6 stroke-2 text-gray-300" />
+                                <p className="text-lg  text-gray-200">
                                     {event?.venue}
                                 </p>
                             </div>
@@ -249,18 +249,37 @@ const Page = ({ params }) => {
                         </div>
                         <div className="mt-10">
                             <div>
-                                <h3 className={`text-gray-800 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>CONTENT</h3>
+                                <h3 className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>CONTENT</h3>
                             </div>
                             <div>
-                                <p className="text-base mt-1 text-gray-900">{event?.description}</p>
+                                <p className="text-base mt-1 text-gray-300">{event?.description}</p>
                             </div>
                         </div>
                         <div className="mt-4">
                             <div>
-                                <h3 className={`text-gray-800 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>SPECIAL INSTRUCTIONS</h3>
+                                <h3 className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>SPECIAL INSTRUCTIONS</h3>
                             </div>
                             <div>
-                                <p className="text-base mt-1 text-gray-900">{event?.specialInstructions}</p>
+                                <p className="text-base mt-1 text-gray-300">{event?.specialInstructions}</p>
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <div>
+                                <h3 className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>AGE RESTRICTION</h3>
+                            </div>
+                            <div>
+                                <p className="text-base mt-1 text-gray-300">
+                                    {event?.ageRestriction ? "Yes! Participants must be adult 18+" : "No age restriction"}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="mt-4">
+                            <div>
+                                <h3 className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>DRESS CODE</h3>
+                            </div>
+                            <div>
+                                <p className="text-base mt-1 text-gray-300">{event?.dressCode}</p>
                             </div>
                         </div>
                     </div>
