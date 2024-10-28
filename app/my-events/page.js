@@ -202,7 +202,7 @@ const TicketCard = () => {
                                 <div className="flex items-center gap-1 mt-2">
                                     <CalendarIcon className="size-5 stroke-2 text-gray-200" />
                                     <p className={`text-gray-200 font-bold text-[11.3px] ${Inria?.className} style={{ fontWeight: 700 }}`}>
-                                        {formatDateTime(event?.startDateTime)}
+                                        {event?.startDate} | {event?.startTime}  
                                     </p>
                                 </div>
                                 <div className="flex items-center gap-1 mt-1">

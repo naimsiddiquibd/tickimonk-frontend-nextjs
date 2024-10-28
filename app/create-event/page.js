@@ -71,8 +71,42 @@ const EventForm = () => {
     }));
   };
 
+  const validateForm = () => {
+    const errors = {};
+  
+    if (!formData.eventName) errors.eventName = "Event name is required";
+    if (!formData.venue) errors.venue = "Venue is required";
+    if (!formData.startDate) errors.startDate = "Start date is required";
+    if (!formData.startTime) errors.startTime = "Start time is required";
+    if (!formData.endDate) errors.endDate = "End date is required";
+    if (!formData.endTime) errors.endTime = "End time is required";
+    if (!formData.description) errors.description = "Description is required";
+    if (!formData.price) errors.price = "Price is required";
+    if (!formData.specialInstructions) errors.specialInstructions = "Special Instruction is required";
+    if (!formData.eventLogo) {
+      errors.eventLogo = "Event logo is required";
+    }
+    if (!formData.thumbnail) {
+      errors.thumbnail = "Event thumbnail is required";
+    }
+  
+    setError(errors);
+  
+    // Return true if there are no errors
+    return Object.keys(errors).length === 0;
+  };
+  
 
   const handleSubmit = async () => {
+
+  if (!validateForm()) {
+    setMessage({
+      text: "Please fill in all required fields.",
+      type: "error",
+    });
+    return;
+  }
+
     setLoading(true); // Start loading when submitting
     try {
       let roleChanged = false;
@@ -221,7 +255,7 @@ const EventForm = () => {
   };
 
   return (
-    <div className="bg-[#112D59] h-full lg:min-h-screen lg:pb-20">
+    <div className="bg-[#112D59] h-full lg:min-h-screen lg:pb-60 mb-16">
 
       <div className="lg:pt-32 pt-28 lg:mx-72 mx-5 2xl:mx-96 pb-16 lg:h-screen h-full">
         <div className="grid lg:grid-cols-3 gap-5">
@@ -229,6 +263,8 @@ const EventForm = () => {
           <div className="lg:col-span-1">
 
             {/* Thumbnail */}
+            {error?.thumbnail && <p className="text-red-500 text-xs my-1">{error.thumbnail}</p>}
+
             <div className=" relative w-full h-80 bg-gray-200 rounded-lg overflow-hidden shadow-sm flex items-center justify-center">
               {/* Default or Selected Image */}
               <img
@@ -253,6 +289,7 @@ const EventForm = () => {
             </div>
 
             {/* Logo */}
+            {error?.eventLogo && <p className="text-red-500 text-xs my-1 mt-4">{error.eventLogo}</p>}
             <div className="bg-white bg-opacity-10 hover:bg-opacity-15 p-2 rounded-md mt-4">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-3">
@@ -342,11 +379,16 @@ const EventForm = () => {
                 className="input w-full max-full border-none bg-opacity-0 focus:outline-none placeholder-gray-400 lg:text-4xl text-2xl font-semibold p-0 mt-4"
               />
             </div>
+            {error?.eventName && <p className="text-red-500 text-xs mt-1">{error.eventName}</p>}
 
 
             <div className="mt-4 grid lg:grid-cols-4 gap-3">
 
               {/* Start & End date */}
+              {error?.startDate && <p className="text-red-500 text-xs">{error.startDate}</p>}
+              {error?.startTime && <p className="text-red-500 text-xs">{error.startTime}</p>}
+              {error?.endTime && <p className="text-red-500 text-xs">{error.endTime}</p>}
+              {error?.endDate && <p className="text-red-500 text-xs">{error.endTime}</p>}
               <div className="bg-white bg-opacity-10 p-2 flex items-center justify-between rounded-md lg:col-span-3">
 
                 <div className="flex items-center gap-2">
@@ -427,6 +469,7 @@ const EventForm = () => {
 
             {/* Event Location */}
             <div className="mt-3">
+            {error?.venue && <p className="text-red-500 text-xs my-1">{error.venue}</p>}
               <div>
                 <div className="bg-white bg-opacity-10 p-2 flex items-center justify-start gap-2 rounded-md cursor-pointer"
                   onClick={() => handleOpenPopup("venue")}>
@@ -438,6 +481,7 @@ const EventForm = () => {
 
             {/* Event Description */}
             <div className="mt-3">
+            {error?.description && <p className="text-red-500 text-xs my-1">{error.description}</p>}
               <div onClick={() => handleOpenPopup("description")} className="bg-white cursor-pointer bg-opacity-10 p-2 flex items-center justify-start gap-2  rounded-md">
                 <NewspaperIcon className="size-4 text-gray-300" />
                 <p className="font-bold text-sm text-white">Add Description</p>
@@ -446,6 +490,7 @@ const EventForm = () => {
 
             {/* Special Instruction*/}
             <div className="mt-3">
+            {error?.specialInstructions && <p className="text-red-500 text-xs my-1">{error.specialInstructions}</p>}
               <div onClick={() => handleOpenPopup("specialInstructions")} className="bg-white cursor-pointer bg-opacity-10 p-2 flex items-center justify-start gap-2  rounded-md">
                 <TableCellsIcon className="size-4 text-gray-300" />
                 <p className="font-bold text-sm text-white">Special Instruction</p>
@@ -458,6 +503,7 @@ const EventForm = () => {
               <div className="bg-white bg-opacity-10 p-2 rounded-md mt-1 py-3">
 
                 {/* Event Price */}
+                {error?.price && <p className="text-red-500 text-xs my-1">{error.price}</p>}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center justify-start gap-2">
                     <div>
