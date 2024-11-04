@@ -21,7 +21,7 @@ const Modal = ({ title, value, onSave, onClose }) => {
           <button className="bg-gray-500 px-4 py-1 rounded" onClick={onClose}>
             Close
           </button>
-          <button className="bg-[#112D59] text-white px-4 py-1 rounded" onClick={handleSave}>
+          <button className="bg-[#0f2a57] text-white px-4 py-1 rounded" onClick={handleSave}>
             Save
           </button>
         </div>

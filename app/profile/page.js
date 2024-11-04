@@ -1,21 +1,22 @@
 import Image from 'next/image';
 import React from 'react';
-import { UserCircleIcon } from '@heroicons/react/24/solid';
-import UnderConstruction from '../components/UnderConstruction';
 
 const page = () => {
     return (
         <div>
-            <div className='bg-white p-4 h-[720px] rounded-lg mt-12'>
-                <UnderConstruction></UnderConstruction>
-                {/* <div className='flex justify-between items-center'>
+            <div className='bg-[#0f2a57] h-full lg:h-full lg:min-h-screen lg:pb-20 mb-16  pt-5 lg:w-[780px] lg:mx-auto mx-5'>
+                {/* <UnderConstruction></UnderConstruction> */}
+                <div className='flex justify-between items-center '>
                     <div className='flex justify-start gap-3 items-center'>
                         <div>
-                            <UserCircleIcon className='w-20 h-20 text-gray-500' />
+                            <img
+                                alt="User Avatar"
+                                className="bg-white p-0.5 rounded-full h-20 w-20"
+                                src="https://cdn1.iconfinder.com/data/icons/fruit-cartoon-flat-cute-fruity/512/mango-512.png" />
                         </div>
                         <div>
-                            <h5 className='font-medium tetx-sm text-gray-700'>Naim Siddiqui</h5>
-                            <p className='font-normal text-xs text-gray-700'>naimsiddiquibd@gmail.com</p>
+                            <h5 className='font-medium tetx-sm text-gray-200'>Naim Siddiqui</h5>
+                            <p className='font-normal text-xs text-gray-200'>naimsiddiquibd@gmail.com</p>
                         </div>
                     </div>
                     <div>
@@ -27,90 +28,90 @@ const page = () => {
                     <div className='flex justify-between items-center gap-5 mt-4'>
                         <label className="form-control w-full max-w-xl">
                             <div className="label">
-                                <span className="label-text">Name</span>
+                                <span className="label-text text-gray-200">Name</span>
                             </div>
                             <input
                                 type="text"
                                 placeholder="Type here"
-                                className="input outline-none focus:no-underline w-full max-w-xl bg-[#eeeaea]"
+                                className="input outline-none focus:no-underline w-full max-w-xl bg-slate-100 bg-opacity-10 text-gray-200"
                             />
                         </label>
                         <label className="form-control w-full max-w-xl">
                             <div className="label">
-                                <span className="label-text">Email</span>
+                                <span className="label-text text-gray-200">Email</span>
                             </div>
                             <input
                                 type="text"
                                 placeholder="Type here"
-                                className="input outline-none focus:no-underline w-full max-w-xl bg-[#eeeaea]"
+                                className="input outline-none focus:no-underline w-full max-w-xl bg-slate-100 bg-opacity-10 text-gray-200"
                             />
                         </label>
                     </div>
                     <div className='flex justify-between items-center gap-5'>
                         <label className="form-control w-full max-w-xl mt-3">
                             <div className="label">
-                                <span className="label-text">Phone number</span>
+                                <span className="label-text text-gray-200">Phone number</span>
                             </div>
                             <input
                                 type="text"
                                 placeholder="Type here"
-                                className="input outline-none focus:no-underline w-full max-w-xl bg-[#eeeaea]"
+                                className="input outline-none focus:no-underline w-full max-w-xl bg-slate-100 bg-opacity-10 text-gray-200"
                             />
                         </label>
                         <label className="form-control w-full max-w-xl mt-3">
                             <div className="label">
-                                <span className="label-text">NID</span>
+                                <span className="label-text text-gray-200">NID</span>
                             </div>
                             <input
                                 type="text"
                                 placeholder="Type here"
-                                className="input outline-none focus:no-underline w-full max-w-xl bg-[#eeeaea]"
+                                className="input outline-none focus:no-underline w-full max-w-xl bg-slate-100 bg-opacity-10 text-gray-200"
                             />
                         </label>
                     </div>
                     <div className='flex justify-between items-center gap-5'>
                         <label className="form-control w-full max-w-xl mt-3">
                             <div className="label">
-                                <span className="label-text">Phone number</span>
+                                <span className="label-text text-gray-200">Phone number</span>
                             </div>
                             <input
                                 type="text"
                                 placeholder="Type here"
-                                className="input outline-none focus:no-underline w-full max-w-xl bg-[#eeeaea]"
+                                className="input outline-none focus:no-underline w-full max-w-xl bg-slate-100 bg-opacity-10 text-gray-200"
                             />
                         </label>
                         <label className="form-control w-full max-w-xl mt-3">
                             <div className="label">
-                                <span className="label-text">Company</span>
+                                <span className="label-text text-gray-200">Company</span>
                             </div>
                             <input
                                 type="text"
                                 placeholder="Type here"
-                                className="input outline-none focus:no-underline w-full max-w-xl bg-[#eeeaea]"
+                                className="input outline-none focus:no-underline w-full max-w-xl bg-slate-100 bg-opacity-10 text-gray-200"
                             />
                         </label>
                     </div>
                     <label className="form-control w-full mt-3">
                         <div className="label">
-                            <span className="label-text">Profile image</span>
+                            <span className="label-text text-gray-200">Profile image</span>
                         </div>
                         <input
-                                type="file"
-                                placeholder="Type here"
-                                className="input outline-none focus:no-underline w-full bg-[#eeeaea]  pt-2"
-                            />
+                            type="file"
+                            placeholder="Type here"
+                            className="input outline-none focus:no-underline w-full bg-slate-100 bg-opacity-10  pt-2 text-gray-200"
+                        />
                     </label>
                     <label className="form-control w-full mt-3">
                         <div className="label">
-                            <span className="label-text">BIO</span>
+                            <span className="label-text text-gray-200">BIO</span>
                         </div>
                         <textarea
                             type="textarea"
                             placeholder="Type here"
-                            className="input outline-none focus:no-underline w-full h-32 pt-3 bg-[#eeeaea]"
+                            className="input outline-none focus:no-underline w-full h-32 pt-3 bg-slate-100 bg-opacity-10 text-gray-200"
                         />
                     </label>
-                </form> */}
+                </form>
             </div>
         </div>
     );

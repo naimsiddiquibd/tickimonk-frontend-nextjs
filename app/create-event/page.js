@@ -73,7 +73,7 @@ const EventForm = () => {
 
   const validateForm = () => {
     const errors = {};
-  
+
     if (!formData.eventName) errors.eventName = "Event name is required";
     if (!formData.venue) errors.venue = "Venue is required";
     if (!formData.startDate) errors.startDate = "Start date is required";
@@ -89,23 +89,23 @@ const EventForm = () => {
     if (!formData.thumbnail) {
       errors.thumbnail = "Event thumbnail is required";
     }
-  
+
     setError(errors);
-  
+
     // Return true if there are no errors
     return Object.keys(errors).length === 0;
   };
-  
+
 
   const handleSubmit = async () => {
 
-  if (!validateForm()) {
-    setMessage({
-      text: "Please fill in all required fields.",
-      type: "error",
-    });
-    return;
-  }
+    if (!validateForm()) {
+      setMessage({
+        text: "Please fill in all required fields.",
+        type: "error",
+      });
+      return;
+    }
 
     setLoading(true); // Start loading when submitting
     try {
@@ -255,9 +255,9 @@ const EventForm = () => {
   };
 
   return (
-    <div className="bg-[#112D59] h-full lg:min-h-screen lg:pb-60 mb-16">
+    <div className="bg-[#0f2a57] h-full lg:min-h-screen lg:pb-60 mb-16">
 
-      <div className="lg:pt-32 pt-28 lg:mx-72 mx-5 2xl:mx-96 pb-16 lg:h-screen h-full">
+      <div className="lg:pt-32 pt-28  mx-5 lg:w-[780px] lg:mx-auto pb-16 lg:h-screen h-full">
         <div className="grid lg:grid-cols-3 gap-5">
 
           <div className="lg:col-span-1">
@@ -277,7 +277,7 @@ const EventForm = () => {
               />
 
               {/* Upload Button */}
-              <label className="absolute bottom-2 right-2 bg-white text-white text-sm py-2 px-2 rounded-full cursor-pointer hover:bg-[#112D59] border-2 border-gray-700 hover:border-white">
+              <label className="absolute bottom-2 right-2 bg-white text-white text-sm py-2 px-2 rounded-full cursor-pointer hover:bg-[#0f2a57] border-2 border-gray-700 hover:border-white">
                 <input
                   type="file"
                   accept="image/*"
@@ -342,7 +342,7 @@ const EventForm = () => {
                   <select
                     value={category}
                     onChange={handleCategoryChange}
-                    className="select pl-8 pr-8 bg-white bg-opacity-10 border-0 hover:bg-opacity-100 hover:bg-white hover:text-[#112D59] text-white h-8 min-h-8 rounded-md">
+                    className="select pl-8 pr-8 bg-white bg-opacity-10 border-0 hover:bg-opacity-100 hover:bg-white hover:text-[#0f2a57] text-white h-8 min-h-8 rounded-md">
                     <option value="Event">Event</option>
                     <option value="Course">Course</option>
                   </select>
@@ -358,7 +358,7 @@ const EventForm = () => {
                   <select
                     value={status}
                     onChange={handleStatusChange}
-                    className="select pl-8 pr-8 bg-white bg-opacity-10 border-0 hover:bg-opacity-100 hover:bg-white hover:text-[#112D59] text-white h-8 min-h-8 rounded-md">
+                    className="select pl-8 pr-8 bg-white bg-opacity-10 border-0 hover:bg-opacity-100 hover:bg-white hover:text-[#0f2a57] text-white h-8 min-h-8 rounded-md">
                     <option value="Public" selected>Public</option>
                     <option value="Draft" >Draft</option>
                   </select>
@@ -469,7 +469,7 @@ const EventForm = () => {
 
             {/* Event Location */}
             <div className="mt-3">
-            {error?.venue && <p className="text-red-500 text-xs my-1">{error.venue}</p>}
+              {error?.venue && <p className="text-red-500 text-xs my-1">{error.venue}</p>}
               <div>
                 <div className="bg-white bg-opacity-10 p-2 flex items-center justify-start gap-2 rounded-md cursor-pointer"
                   onClick={() => handleOpenPopup("venue")}>
@@ -481,7 +481,7 @@ const EventForm = () => {
 
             {/* Event Description */}
             <div className="mt-3">
-            {error?.description && <p className="text-red-500 text-xs my-1">{error.description}</p>}
+              {error?.description && <p className="text-red-500 text-xs my-1">{error.description}</p>}
               <div onClick={() => handleOpenPopup("description")} className="bg-white cursor-pointer bg-opacity-10 p-2 flex items-center justify-start gap-2  rounded-md">
                 <NewspaperIcon className="size-4 text-gray-300" />
                 <p className="font-bold text-sm text-white">Add Description</p>
@@ -490,7 +490,7 @@ const EventForm = () => {
 
             {/* Special Instruction*/}
             <div className="mt-3">
-            {error?.specialInstructions && <p className="text-red-500 text-xs my-1">{error.specialInstructions}</p>}
+              {error?.specialInstructions && <p className="text-red-500 text-xs my-1">{error.specialInstructions}</p>}
               <div onClick={() => handleOpenPopup("specialInstructions")} className="bg-white cursor-pointer bg-opacity-10 p-2 flex items-center justify-start gap-2  rounded-md">
                 <TableCellsIcon className="size-4 text-gray-300" />
                 <p className="font-bold text-sm text-white">Special Instruction</p>
@@ -597,7 +597,7 @@ const EventForm = () => {
                   </p>
                 )}
                 <div disabled={loading} onClick={handleSubmit} className="bg-white p-3 rounded-md mt-8 hover:bg-slate-200 cursor-pointer">
-                  <p className="text-[#112D59] text-sm text-center font-semibold">{loading ? "Creating Event..." : "Create Event"}</p>
+                  <p className="text-[#0f2a57] text-sm text-center font-semibold">{loading ? "Creating Event..." : "Create Event"}</p>
                 </div>
               </div>
             </div>

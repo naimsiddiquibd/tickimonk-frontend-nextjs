@@ -24,7 +24,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className="bg-[#112D59]">
+        <div className="bg-[#0f2a57]">
           <div className="">
            {/* <Sidebar session={session}></Sidebar> */}
            <NewNavBarForTop session={session}></NewNavBarForTop>
