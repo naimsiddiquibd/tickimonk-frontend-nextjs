@@ -76,7 +76,7 @@ const TicketCard = () => {
     };
 
     return (
-        <div className='pt-28 pb-16 h-full lg:min-h-screen lg:mx-28 mx-5 2xl:mx-96'>
+        <div className='lg:pt-4 pt-2 pb-16 h-full min-h-screen mx-5 lg:w-full lg:max-w-[1220px] lg:mx-auto'>
             <div className='flex justify-start items-center gap-2'>
                 <div className="breadcrumbs text-sm text-gray-400">
                     <ul>

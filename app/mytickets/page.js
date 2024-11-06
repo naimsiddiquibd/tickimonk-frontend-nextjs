@@ -61,7 +61,7 @@ const MyTickets = () => {
     // const backendUrl = "http://localhost:5001";
 
     return (
-        <div className='pt-28 lg:mx-28 mx-5 2xl:mx-96 pb-16 min-h-screen h-full'>
+        <div className='lg:pt-2 pt-2 mx-5 pb-16 min-h-screen h-full lg:w-full lg:max-w-[1220px] lg:mx-auto'>
             <div className='flex justify-start items-center gap-2'>
                 <div className="breadcrumbs text-sm text-gray-300">
                     <ul>

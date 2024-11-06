@@ -79,7 +79,7 @@ const QRCodeScanner = () => {
     const formattedStartDateTime = new Date(ticketData?.startDateTime).toLocaleString();
 
     return (
-        <div className=' min-h-screen pt-28 pb-16 lg:mx-28 mx-5 2xl:mx-96'>
+        <div className=' min-h-screen pt-2 lg:mx-28 mx-5'>
             <div className="breadcrumbs text-sm text-gray-200">
                 <ul>
                     <li><a>Home</a></li>

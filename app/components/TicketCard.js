@@ -83,7 +83,7 @@ const TicketCard = ({ searchQuery }) => {
     return (
         <div>
              {/* <h2 className="text text-3xl font-bold text-gray-800 text-center my-5">All in One Place with TikiMonk</h2> */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mx-auto z-10">
             {sortedEvents.map(event => {
                 const shareUrl = `https://tickimonk.vercel.app/${event._id}`; // Construct the share URL dynamically
 
@@ -179,7 +179,7 @@ const TicketCard = ({ searchQuery }) => {
                     //         </div>
                     //     </div>
                     // </div>
-                    <div className="card card-compact 0 w-full shadow-sm rounded-md">
+                    <div className="card card-compact 0 w-full shadow-sm rounded-md z-10">
                         <figure className="relative">
                             <Image
                                 src={event?.thumbnail}

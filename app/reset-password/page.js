@@ -72,7 +72,7 @@ const ResetPasswordPage = () => {
                             <input
                                 type="password"
                                 placeholder="New Password"
-                                className="input outline-none focus:no-underline w-full max-w-xl bg-slate-100 opacity-15"
+                                className="input outline-none focus:no-underline w-full text-gray-200 max-w-xl bg-slate-100 opacity-15"
                                 value={newPassword}
                                 onChange={(e) => setNewPassword(e.target.value)}
                                 required
@@ -86,7 +86,7 @@ const ResetPasswordPage = () => {
                             <input
                                 type="password"
                                 placeholder="Confirm Password"
-                                className="input outline-none focus:no-underline w-full max-w-xl bg-slate-100"
+                                className="input text-gray-200 outline-none focus:no-underline w-full max-w-xl bg-slate-100"
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 required

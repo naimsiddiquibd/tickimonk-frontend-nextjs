@@ -257,7 +257,7 @@ const EventForm = () => {
   return (
     <div className="bg-[#0f2a57] h-full lg:min-h-screen lg:pb-60 mb-16">
 
-      <div className="lg:pt-32 pt-28  mx-5 lg:w-[780px] lg:mx-auto pb-16 lg:h-screen h-full">
+      <div className="lg:pt-10 pt-2  mx-5 lg:w-[780px] lg:mx-auto lg:pb-16 pb-0 lg:h-screen h-full">
         <div className="grid lg:grid-cols-3 gap-5">
 
           <div className="lg:col-span-1">

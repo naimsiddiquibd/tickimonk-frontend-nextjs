@@ -48,7 +48,7 @@ console.log("eita result from login page:", result);
                             <input 
                                 type="text" 
                                 placeholder="Type here" 
-                                className="input outline-none focus:no-underline w-full text-gray-600 max-w-xl bg-slate-100 bg-opacity-10" 
+                                className="input outline-none focus:no-underline w-full text-gray-200 max-w-xl bg-slate-100 bg-opacity-10" 
                                 {...register('email', { required: true })}
                             />
                             {errors.email && <span className="text-red-500">This field is required</span>}

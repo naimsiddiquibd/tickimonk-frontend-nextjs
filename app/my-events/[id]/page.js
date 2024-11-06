@@ -101,101 +101,103 @@ const Page = ({ params }) => {
 
   return (
     <div>
-      <div className="lg:mx-28 mx-5 2xl:mx-96 lg:min-h-screen h-full pt-32 lg:px-28 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-7 gap-5">
-          <div className="bg-white bg-opacity-10 p-4 rounded-md lg:col-span-2 max-h-80">
-            <div className="h-[180px] lg:h-[215px] w-full">
-              <Image
-                src={event.thumbnail}
-                width={500}
-                height={500}
-                alt="Event Image"
-                className="object-cover w-full h-full"
-              />
-            </div>
-            <div className="flex justify-start items-center gap-2 mt-5">
-              <div className="w-12 h-12">
+      <div className="lg:mx-28 mx-5x lg:min-h-screen min-h-screen h-full pt-2 lg:px-28 pb-16">
+        <div className="lg:pt-10 mx-5 lg:w-[780px] lg:mx-auto lg:pb-16 pb-0 lg:h-screen h-full">
+          <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-7 gap-5">
+            <div className="bg-white bg-opacity-10 p-4 rounded-md lg:col-span-2 max-h-80">
+              <div className="h-[180px] lg:h-[215px] w-full">
                 <Image
-                  src={event.eventLogo}
+                  src={event.thumbnail}
                   width={500}
                   height={500}
                   alt="Event Image"
-                  className="object-cover w-full h-full rounded-sm"
+                  className="object-cover w-full h-full"
                 />
               </div>
-              <p
-                className={`text-white font-bold text-xl ${Inria.className} style={{ fontWeight: 700 }}`}
-              >
-                {event?.eventName}
-              </p>
+              <div className="flex justify-start items-center gap-2 mt-5">
+                <div className="w-12 h-12">
+                  <Image
+                    src={event.eventLogo}
+                    width={500}
+                    height={500}
+                    alt="Event Image"
+                    className="object-cover w-full h-full rounded-sm"
+                  />
+                </div>
+                <p
+                  className={`text-white font-bold text-xl ${Inria.className} style={{ fontWeight: 700 }}`}
+                >
+                  {event?.eventName}
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="lg:col-span-3">
-            <div className="gap-0 rounded-b-md">
-              <h2
-                className={`text-gray-200 font-bold text-4xl uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}
-              >
-                {event?.eventName}
-              </h2>
-              <p className="text-gray-300 text-lg mb-5">@ {organizerName}</p>
-              <div className="flex items-center gap-1 mt-2">
-                <CalendarIcon className="size-6 stroke-2 text-gray-300" />
-                <p
-                  className={`text-gray-300 font-bold text-lg ${Inria?.className} style={{ fontWeight: 700 }}`}
+            <div className="lg:col-span-3">
+              <div className="gap-0 rounded-b-md">
+                <h2
+                  className={`text-gray-200 font-bold text-4xl uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}
                 >
-                  {new Date(event.startDateTime).toLocaleString()}
-                </p>
-              </div>
-              <div className="flex items-center gap-1 mt-1">
-                <MapPinIcon className="size-6 stroke-2 text-gray-300" />
-                <p className="text-lg  text-gray-300">{event?.venue}</p>
-              </div>
-              <div className="card-actions justify-between items-center bg-gray-200 rounded-sm mt-5 py-[10px] px-[10px]">
-                <p
-                  className={`text-gray-800 font-bold text-2xl ${Inria.className} style={{ fontWeight: 700 }}`}
-                >
-                  3232 BDT
-                </p>
-                <button
-                  className={`bg-gray-800 hover:bg-gray-950 text-white py-1 px-3 rounded-sm text-lg ${Inria.className}`}
-                  onClick={handleOpenPopup}
-                >
-                  Ask for a Modification
-                </button>
-              </div>
-              <div className="mt-10">
-                <div>
-                  <h3 className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>CONTENT</h3>
-                </div>
-                <div>
-                  <p className="text-base mt-1 text-gray-300">{event?.description}</p>
-                </div>
-              </div>
-              <div className="mt-4">
-                <div>
-                  <h3 className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>SPECIAL INSTRUCTIONS</h3>
-                </div>
-                <div>
-                  <p className="text-base mt-1 text-gray-300">{event?.specialInstructions}</p>
-                </div>
-              </div>
-              <div className="mt-4">
-                <div>
-                  <h3 className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>AGE RESTRICTION</h3>
-                </div>
-                <div>
-                  <p className="text-base mt-1 text-gray-300">
-                    {event?.ageRestriction ? "Yes! Participants must be adult 18+" : "No age restriction"}
+                  {event?.eventName}
+                </h2>
+                <p className="text-gray-300 text-lg mb-5">@ {organizerName}</p>
+                <div className="flex items-center gap-1 mt-2">
+                  <CalendarIcon className="size-6 stroke-2 text-gray-300" />
+                  <p
+                    className={`text-gray-300 font-bold text-lg ${Inria?.className} style={{ fontWeight: 700 }}`}
+                  >
+                    {new Date(event.startDateTime).toLocaleString()}
                   </p>
                 </div>
-              </div>
-
-              <div className="mt-4">
-                <div>
-                  <h3 className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>DRESS CODE</h3>
+                <div className="flex items-center gap-1 mt-1">
+                  <MapPinIcon className="size-6 stroke-2 text-gray-300" />
+                  <p className="text-lg  text-gray-300">{event?.venue}</p>
                 </div>
-                <div>
-                  <p className="text-base mt-1 text-gray-300">{event?.dressCode}</p>
+                <div className="card-actions justify-between items-center bg-gray-200 rounded-sm mt-5 py-[10px] px-[10px]">
+                  <p
+                    className={`text-gray-800 font-bold text-2xl ${Inria.className} style={{ fontWeight: 700 }}`}
+                  >
+                    3232 BDT
+                  </p>
+                  <button
+                    className={`bg-gray-800 hover:bg-gray-950 text-white py-1 px-3 rounded-sm text-lg ${Inria.className}`}
+                    onClick={handleOpenPopup}
+                  >
+                    Ask for a Modification
+                  </button>
+                </div>
+                <div className="mt-10">
+                  <div>
+                    <h3 className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>CONTENT</h3>
+                  </div>
+                  <div>
+                    <p className="text-base mt-1 text-gray-300">{event?.description}</p>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <div>
+                    <h3 className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>SPECIAL INSTRUCTIONS</h3>
+                  </div>
+                  <div>
+                    <p className="text-base mt-1 text-gray-300">{event?.specialInstructions}</p>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <div>
+                    <h3 className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>AGE RESTRICTION</h3>
+                  </div>
+                  <div>
+                    <p className="text-base mt-1 text-gray-300">
+                      {event?.ageRestriction ? "Yes! Participants must be adult 18+" : "No age restriction"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <div>
+                    <h3 className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>DRESS CODE</h3>
+                  </div>
+                  <div>
+                    <p className="text-base mt-1 text-gray-300">{event?.dressCode}</p>
+                  </div>
                 </div>
               </div>
             </div>

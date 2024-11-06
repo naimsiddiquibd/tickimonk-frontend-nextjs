@@ -37,7 +37,7 @@ const NewNavBarForTop = ({ session }) => {
         : guestNavItems;
 
     return (
-        <div className=" z-[999999] lg:w-full lg:max-w-[1220px] lg:mx-auto">
+        <div className=" z-50 lg:w-full lg:max-w-[1220px] lg:mx-auto">
             <div className="drawer mb-4 pt-5 px-5 lg:px-0">
                 <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col ">
@@ -90,7 +90,7 @@ const NewNavBarForTop = ({ session }) => {
                                     <div className="hidden lg:block">
                                         <p className={userNameColor}>{session?.user?.name}</p>
                                     </div>
-                                    <div className="dropdown dropdown-end">
+                                    <div className="dropdown dropdown-end z-50">
                                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                             <div className="w-10 rounded-full">
                                                 <img
@@ -125,7 +125,7 @@ const NewNavBarForTop = ({ session }) => {
                     </div>
                 </div>
 
-                <div className="drawer-side">
+                <div className="drawer-side z-50">
                     <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                     <ul className="menu bg-base-200 min-h-full w-80 p-4">
                         {filteredNavItems.map(item => (

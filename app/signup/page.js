@@ -62,7 +62,7 @@ const SignupPage = () => {
                                 <input
                                     type="text"
                                     placeholder="Type here"
-                                    className="input text-xs outline-none focus:no-underline w-full  max-w-xl bg-slate-100 bg-opacity-10"
+                                    className="input text-xs outline-none focus:no-underline w-full text-gray-200  max-w-xl bg-slate-100 bg-opacity-10"
                                     {...register("name", { required: true })}
                                 />
                                 {errors.name && (
@@ -76,7 +76,7 @@ const SignupPage = () => {
                                 <input
                                     type="email"
                                     placeholder="Type here"
-                                    className="input text-xs outline-none focus:no-underline w-full max-w-xl bg-slate-100 bg-opacity-10"
+                                    className="input text-xs outline-none focus:no-underline text-gray-200 w-full max-w-xl bg-slate-100 bg-opacity-10"
                                     {...register("email", { required: true })}
                                 />
                                 {errors.email && (
@@ -92,7 +92,7 @@ const SignupPage = () => {
                                 <input
                                     type="tel"
                                     placeholder="Type here"
-                                    className="input text-xs outline-none focus:no-underline w-full max-w-xl bg-slate-100 bg-opacity-10"
+                                    className="input text-xs outline-none focus:no-underline text-gray-200 w-full max-w-xl bg-slate-100 bg-opacity-10"
                                     {...register("phoneNumber", { required: true })}
                                 />
                                 {errors.phoneNumber && (
@@ -106,7 +106,7 @@ const SignupPage = () => {
                                 <input
                                     type="text"
                                     placeholder="Type here"
-                                    className="input text-xs outline-none focus:no-underline w-full max-w-xl bg-slate-100 bg-opacity-10"
+                                    className="input text-xs outline-none focus:no-underline text-gray-200 w-full max-w-xl bg-slate-100 bg-opacity-10"
                                     {...register("nid", { required: true })}
                                 />
                                 {errors.nid && (
@@ -122,7 +122,7 @@ const SignupPage = () => {
                                 <input
                                     type="password"
                                     placeholder="Type here"
-                                    className="input text-xs outline-none focus:no-underline w-full max-w-xl bg-slate-100 bg-opacity-10"
+                                    className="input text-xs outline-none focus:no-underline text-gray-200 w-full max-w-xl bg-slate-100 bg-opacity-10"
                                     {...register("password", { required: true })}
                                 />
                                 {errors.password && (
@@ -136,7 +136,7 @@ const SignupPage = () => {
                                 <input
                                     type="password"
                                     placeholder="Type here"
-                                    className="input text-xs outline-none focus:no-underline w-full max-w-xl bg-slate-100 bg-opacity-10"
+                                    className="input text-xs outline-none focus:no-underline text-gray-200 w-full max-w-xl bg-slate-100 bg-opacity-10"
                                     {...register("confirmPassword", { required: true })}
                                 />
                                 {errors.confirmPassword && (
