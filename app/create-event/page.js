@@ -391,7 +391,7 @@ const EventForm = () => {
               {error?.endDate && <p className="text-red-500 text-xs">{error.endTime}</p>}
               <div className="bg-white bg-opacity-10 p-2 flex items-center justify-between rounded-md lg:col-span-3">
 
-                <div className="flex items-center gap-2">
+                <div className="lg:flex lg:items-center lg:gap-2 hidden">
                   <div>
                     <Image
                       src={StartEndIcon}
@@ -401,7 +401,7 @@ const EventForm = () => {
                       className=""
                     />
                   </div>
-                  <div className="text-sm text-white grid grid-cols-1 gap-4 content-between h-full">
+                  <div className="text-sm text-white grid grid-cols-1 gap-4 content-between h-full ">
                     <div>Start</div>
                     <div>End</div>
                   </div>
