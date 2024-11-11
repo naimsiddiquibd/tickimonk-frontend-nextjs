@@ -470,30 +470,59 @@ const EventForm = () => {
             {/* Event Location */}
             <div className="mt-3">
               {error?.venue && <p className="text-red-500 text-xs my-1">{error.venue}</p>}
-              <div>
+              {/* <div>
                 <div className="bg-white bg-opacity-10 p-2 flex items-center justify-start gap-2 rounded-md cursor-pointer"
                   onClick={() => handleOpenPopup("venue")}>
                   <MapPinIcon className="size-4 text-gray-300" />
                   <p className="font-bold text-sm text-white">Add Event Location</p>
                 </div>
+              </div> */}
+              <div onClick={() => handleOpenPopup("venue")} className="bg-white cursor-pointer bg-opacity-10 p-2 gap-2  rounded-md">
+                <div className="flex items-center gap-2 justify-start">
+                  <MapPinIcon className="size-4 text-gray-300" />
+                  <p className="font-bold text-sm text-white">Add Description</p>
+                </div>
+                <p>
+                  {formData.venue
+                    ? formData.venue.split(" ").slice(0, 20).join(" ") + (formData.venue.split(" ").length > 20 ? "..." : "")
+                    : ""}
+                </p>
               </div>
             </div>
 
             {/* Event Description */}
             <div className="mt-3">
               {error?.description && <p className="text-red-500 text-xs my-1">{error.description}</p>}
-              <div onClick={() => handleOpenPopup("description")} className="bg-white cursor-pointer bg-opacity-10 p-2 flex items-center justify-start gap-2  rounded-md">
-                <NewspaperIcon className="size-4 text-gray-300" />
-                <p className="font-bold text-sm text-white">Add Description</p>
+              <div onClick={() => handleOpenPopup("description")} className="bg-white cursor-pointer bg-opacity-10 p-2 gap-2  rounded-md">
+                <div className="flex items-center gap-2 justify-start">
+                  <NewspaperIcon className="size-4 text-gray-300" />
+                  <p className="font-bold text-sm text-white">Add Description</p>
+                </div>
+                <p>
+                  {formData.description
+                    ? formData.description.split(" ").slice(0, 20).join(" ") + (formData.description.split(" ").length > 20 ? "..." : "")
+                    : ""}
+                </p>
               </div>
             </div>
 
             {/* Special Instruction*/}
             <div className="mt-3">
               {error?.specialInstructions && <p className="text-red-500 text-xs my-1">{error.specialInstructions}</p>}
-              <div onClick={() => handleOpenPopup("specialInstructions")} className="bg-white cursor-pointer bg-opacity-10 p-2 flex items-center justify-start gap-2  rounded-md">
+              {/* <div onClick={() => handleOpenPopup("specialInstructions")} className="bg-white cursor-pointer bg-opacity-10 p-2 flex items-center justify-start gap-2  rounded-md">
                 <TableCellsIcon className="size-4 text-gray-300" />
                 <p className="font-bold text-sm text-white">Special Instruction</p>
+              </div> */}
+              <div onClick={() => handleOpenPopup("specialInstructions")} className="bg-white cursor-pointer bg-opacity-10 p-2 gap-2  rounded-md">
+                <div className="flex items-center gap-2 justify-start">
+                  <TableCellsIcon className="size-4 text-gray-300" />
+                  <p className="font-bold text-sm text-white">Special Instructions</p>
+                </div>
+                <p>
+                  {formData.specialInstructions
+                    ? formData.specialInstructions.split(" ").slice(0, 20).join(" ") + (formData.specialInstructions.split(" ").length > 20 ? "..." : "")
+                    : ""}
+                </p>
               </div>
             </div>
 
@@ -512,9 +541,12 @@ const EventForm = () => {
                     <div className="text-sm text-white">Price</div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <p className="text-sm font-medium text-gray-300 ">Currency BDT</p>
+                    <p className="text-sm font-medium text-gray-300 ">
+                      {formData?.price || "Currency"} BDT
+                    </p>
                     <PencilSquareIcon onClick={() => handleOpenPopup("price")} className="cursor-pointer size-6 text-gray-300 mr-1" />
                   </div>
+
                 </div>
 
                 <div className="divider mt-1 mb-1"></div>
@@ -575,7 +607,12 @@ const EventForm = () => {
                     <div className="text-sm text-white">Dress Code</div>
                   </div>
                   <div className="flex items-center gap-3 font-medium">
-                    <p className="text-sm text-gray-300">Keep it black if not needed</p>
+                    <p className="text-sm text-gray-300">
+                      {formData?.dressCode
+                        ? formData.dressCode.split(" ").slice(0, 7).join(" ") + (formData.dressCode.split(" ").length > 7 ? "..." : "")
+                        : "Keep it black if not needed"}
+                    </p>
+
                     <PencilSquareIcon onClick={() => handleOpenPopup("dressCode")} className="cursor-pointer size-6 text-gray-300 mr-1" />
                   </div>
                 </div>
@@ -590,7 +627,7 @@ const EventForm = () => {
               )}
 
               <div>
-                {loading && <p className="text-center mt-2 text-white">Loading...</p>}
+                {loading && <p className="text-center mt-2 text-white"><span className="loading loading-dots loading-lg"></span></p>}
                 {message.text && (
                   <p className={`text-center mt-4 ${message.type === "error" ? "text-red-500" : "text-green-500"}`}>
                     {message.text}

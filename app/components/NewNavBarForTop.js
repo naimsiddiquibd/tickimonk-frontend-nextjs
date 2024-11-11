@@ -4,6 +4,27 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import LogoForWhiteBg from '../../public/logo-white.png';
 import Image from 'next/image';
+import toast, { Toaster } from 'react-hot-toast';
+
+const notify = () => toast(
+    <span className="pr-4 font-medium"><span className='text-red-400'>You’re out! </span>We will miss you.</span>, 
+    {
+        icon: <img src="https://res.cloudinary.com/deyd102hk/image/upload/v1731303931/Sign_Out.gif" alt="Farewell"  className="w-16 h-16 bg-white/50 p-0 border-none object-contain rounded"        />,
+    }
+);
+
+const handleLogout = async () => {
+    try {
+        await signOut({ redirect: false }); // Prevent immediate redirect
+        notify();
+        setTimeout(() => {
+            window.location.href = '/'; // Redirect after a short delay
+        }, 2000); // Adjust timing as needed
+    } catch (error) {
+        toast.error("Logout failed. Please try again.");
+    }
+};
+
 
 const navItems = [
     { href: '/', label: 'Home' },
@@ -109,14 +130,14 @@ const NewNavBarForTop = ({ session }) => {
                                                 </Link>
                                             </li>
                                             <li><Link href="create-event">Create Event</Link></li>
-                                            <li><a onClick={() => signOut()} >Logout</a></li>
+                                            <li><a onClick={handleLogout} >Logout</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             ) : (
                                 <Link href="/login">
                                     <div
-                                        className="px-6 py-2 rounded-sm shadow-sm font-bold bg-[#DE135A] text-white">
+                                        className="px-6 py-2 rounded-md shadow-sm font-bold bg-[#DE135A] text-white">
                                         Login
                                     </div>
                                 </Link>
@@ -141,6 +162,7 @@ const NewNavBarForTop = ({ session }) => {
                     </ul>
                 </div>
             </div>
+            <Toaster />
         </div>
     );
 };

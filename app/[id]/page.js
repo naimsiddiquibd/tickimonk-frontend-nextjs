@@ -133,7 +133,7 @@ const Page = ({ params }) => {
     if (loading) {
         return (
             <div className="flex justify-center items-center h-screen">
-                <p>Loading...</p>
+                <span className="loading loading-dots loading-lg"></span>
             </div>
         );
     }

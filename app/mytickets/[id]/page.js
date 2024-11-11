@@ -92,7 +92,7 @@ const Page = ({ params }) => {
     if (loading) {
         return (
             <div className="flex justify-center items-center h-screen ">
-                <p>Loading...</p>
+                <p><span className="loading loading-dots loading-lg"></span></p>
             </div>
         );
     }
@@ -120,7 +120,7 @@ const Page = ({ params }) => {
 
     return (
         <div className="w-full flex justify-center">
-            <div className='pt-28 lg:mx-28 mx-5 2xl:mx-96'>
+            <div className='pt-2 lg:mx-28 mx-5 2xl:mx-96'>
                 <div className='flex justify-start items-center gap-2 mb-5'>
                     <div className="breadcrumbs text-sm text-gray-400">
                         <ul>

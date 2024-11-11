@@ -40,7 +40,7 @@ const TicketsByEvents = ({ id, setTickets, tickets }) => {
     if (loading) {
         return (
             <div className="flex justify-center items-center h-screen bg-slate-100">
-                <p>Loading...</p>
+                <p><span className="loading loading-dots loading-lg"></span></p>
             </div>
         );
     }

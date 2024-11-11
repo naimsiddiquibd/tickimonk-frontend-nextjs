@@ -1,35 +1,38 @@
-"use client";
+
+ "use client";
 import { useForm } from 'react-hook-form';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
-import React, { useState } from 'react';  // Import useState
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const Page = () => {
     const router = useRouter();
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [loginError, setLoginError] = useState('');  // State for handling login error
+    const [loginError, setLoginError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);  // Loading state for the button
 
     const onSubmit = async (data) => {
+        setIsLoading(true);  // Set loading state to true when submitting
         const result = await signIn("credentials", {
             redirect: false,
             email: data.email,
             password: data.password,
         });
-console.log("eita result from login page:", result);
+        console.log("eita result from login page:", result);
+        setIsLoading(false);  // Set loading state to false after submission completes
+
         if (result?.ok) {
-            // Navigate and reload using window.location.href
             window.location.href = '/';
         } else if (result?.error) {
             setLoginError("Email or password is incorrect!");
         } else {
-            // Update the error state with the error message from the API
             setLoginError(result?.error || "Something went wrong! Please contact support.");
         }
     };
 
     return (
-        <div className='h-full lg:h-screen lg:pt-28 pt-24 pb-10  mx-5'>
+        <div className='h-full lg:h-screen pt-2 mx-5'>
             <div className='flex justify-center items-center'>
                 <div className='w-[500px] bg-white bg-opacity-10 p-7 rounded-lg'>
                     <p className='text-center font-bold text-gray-200'>Login</p>
@@ -37,7 +40,6 @@ console.log("eita result from login page:", result);
                         Welcome to the Ticketing System! Log in to purchase tickets or create and manage events with ease. Sign in to get started!
                     </p>
 
-                    {/* Display error message if loginError state is set */}
                     {loginError && <p className="text-center text-red-500 mb-4">{loginError}</p>}
 
                     <form onSubmit={handleSubmit(onSubmit)}>
@@ -70,30 +72,18 @@ console.log("eita result from login page:", result);
                         <div>
                             <div className="form-control">
                                 <label className="label cursor-pointer justify-start gap-3">
-                                    <input type="checkbox" defaultChecked className="checkbox" />
-                                    <p className="label-text text-sm">Agree to the <Link href="terms-condition" className='text-[#E61D64]'>Terms and Conditions</Link></p>
+                                    <input type="checkbox" defaultChecked className="checkbox text-gray-200 border-gray-200" />
+                                    <p className="label-text text-sm text-gray-200">Agree to the <Link href="terms-condition" className='text-[#E61D64]'>Terms and Conditions</Link></p>
                                 </label>
                             </div>
                         </div>
 
                         <div className='mt-10'>
-                            <button type="submit" className='text-[16px] bg-[#E61D64] btn border-0 rounded-md text-white font-medium px-12 w-full hover:bg-[#ba4870]'>
-                                Login
+                            <button type="submit" className='text-[16px] bg-[#E61D64] btn border-0 rounded-md text-white font-medium px-12 w-full hover:bg-[#ba4870]' disabled={isLoading}>
+                                {isLoading ? "Loading..." : "Login"}
                             </button>
                         </div>
                     </form>
-
-                    {/* <button className='mt-3' onClick={()=> signIn("github", { callbackUrl: "/" })}>
-                        <p className='text-[16px] bg-[#dfbf3e] btn border-0 rounded-full text-white font-medium px-12 w-full hover:bg-[#ba4870]'>
-                            GitHub for Test
-                        </p>
-                    </button>
-
-                    <button className='mt-3' onClick={()=> signIn("google", { callbackUrl: "/" })}>
-                        <p className='text-[16px] bg-[#dfbf3e] btn border-0 rounded-full text-white font-medium px-12 w-full hover:bg-[#ba4870]'>
-                            Google for Test
-                        </p>
-                    </button> */}
 
                     <Link href="forget-password">
                         <p className='text-center text-xs font-semibold text-gray-200 mt-4 hover:text-[#E61D64]'>Forgot Password?</p>
@@ -112,3 +102,17 @@ console.log("eita result from login page:", result);
 };
 
 export default Page;
+                   
+                    {/* <button className='mt-3' onClick={()=> signIn("github", { callbackUrl: "/" })}>
+                        <p className='text-[16px] bg-[#dfbf3e] btn border-0 rounded-full text-white font-medium px-12 w-full hover:bg-[#ba4870]'>
+                            GitHub for Test
+                        </p>
+                    </button>
+
+                    <button className='mt-3' onClick={()=> signIn("google", { callbackUrl: "/" })}>
+                        <p className='text-[16px] bg-[#dfbf3e] btn border-0 rounded-full text-white font-medium px-12 w-full hover:bg-[#ba4870]'>
+                            Google for Test
+                        </p>
+                    </button> */}
+
+  

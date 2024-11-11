@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { XMarkIcon } from '@heroicons/react/24/solid'
 
 const Modal = ({ title, value, onSave, onClose }) => {
   const [inputValue, setInputValue] = useState(value || "");
@@ -10,18 +11,18 @@ const Modal = ({ title, value, onSave, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50">
-      <div className="bg-white bg-opacity-80 p-4 rounded-md w-full max-w-md  lg:mx-0 mx-4">
-        <h2 className="text-lg font-semibold mb-2 text-gray-800">{title}</h2>
+      <div className="bg-[#323537] rounded-xl w-full max-w-md  lg:mx-0">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold px-5 py-4 text-gray-200">{title}</h2>
+          <XMarkIcon className="size-7 cursor-pointer bg-[#424547] p-2 rounded-full text-gray-200 mr-3" onClick={onClose} />
+        </div>
         <textarea
-          className="w-full p-2 border border-gray-300 rounded-md h-32"
+          className="w-full pt-3 px-5 border border-none h-36 text-gray-200"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
-        <div className="flex justify-end gap-2 mt-4">
-          <button className="bg-gray-500 px-4 py-1 rounded" onClick={onClose}>
-            Close
-          </button>
-          <button className="bg-[#0f2a57] text-white px-4 py-1 rounded" onClick={handleSave}>
+        <div className="flex justify-end gap-2 ">
+          <button className="bg-gray-200  text-gray-800 px-4 py-1 rounded-md m-3" onClick={handleSave}>
             Save
           </button>
         </div>

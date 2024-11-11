@@ -8,7 +8,7 @@ const GetStarted = () => {
                 <div className="col-span-3">
                     <div className="lg:flex lg:items-center lg:justify-between ">
                         <h2 className="text-white text-[40px] leading-snug font-semibold mb-6 lg:mb-0">
-                        Get Started with TikiMonk Today!
+                        Get Started with Tickimonk Today!
                         </h2>
                         <Link href="/create-event" className="text-white border-2 px-12 py-4 rounded-md hover:bg-white hover:text-black mt-4">
                             Create Event

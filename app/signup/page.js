@@ -43,7 +43,7 @@ const SignupPage = () => {
     };
 
     return (
-        <div className="h-full lg:h-screen lg:pt-28 pt-24 pb-10  mx-5">
+        <div className="h-full lg:h-screen  pt-2  mx-5">
             <div className="flex justify-center items-center">
                 <div className="w-[500px] bg-white bg-opacity-10 p-7 rounded-lg">
                     <p className="text-center font-bold text-gray-200">Signup</p>
@@ -149,7 +149,7 @@ const SignupPage = () => {
                                 <label className="label cursor-pointer justify-start gap-3">
                                     <input
                                         type="checkbox"
-                                        className="checkbox"
+                                        className="checkbox border-gray-200"
                                         {...register("terms", { required: true })}
                                     />
                                     <p className="label-text text-sm text-gray-200">
