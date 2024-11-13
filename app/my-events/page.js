@@ -12,19 +12,7 @@ import { fetchEvents } from '@/utils/actions/fetchEvents';
 import { CalendarIcon, MapPinIcon } from '@heroicons/react/24/outline'
 
 import Link from 'next/link';
-import {
-    FacebookShareButton,
-    LinkedinShareButton,
-    TwitterShareButton,
-    WhatsappShareButton,
-    TelegramShareButton,
-    FacebookIcon,
-    LinkedinIcon,
-    WhatsappIcon,
-    XIcon,
-    TelegramIcon,
-} from "react-share";
-import TicketsByEvents from "./components/TicketsByEvents";
+
 
 const TicketCard = () => {
     const [events, setEvents] = useState([]);

@@ -6,6 +6,8 @@ import { fetchUserById } from "@/utils/actions/fetchUserById";
 import { CalendarIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import emailjs from "emailjs-com";
 import { Inria_Sans } from "next/font/google";
+import TicketsByEvents from "../components/TicketsByEvents";
+import TicketSalesAndRevenue from "../components/TicketSalesAndRevenue";
 
 const Inria = Inria_Sans({
   weight: ["300", "400", "700"],
@@ -20,6 +22,7 @@ const Page = ({ params }) => {
   const [error, setError] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const [selectedTab, setSelectedTab] = useState("Description");
 
   useEffect(() => {
     const getEvent = async () => {
@@ -102,7 +105,7 @@ const Page = ({ params }) => {
   return (
     <div>
       <div className="lg:mx-28 mx-5x lg:min-h-screen min-h-screen h-full pt-2 lg:px-28 pb-16">
-        <div className="lg:pt-10 mx-5 lg:w-[780px] lg:mx-auto lg:pb-16 pb-0 lg:h-screen h-full">
+        <div className=" mx-5 lg:w-[780px] lg:mx-auto lg:pb-16 pb-0  h-full">
           <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-7 gap-5">
             <div className="bg-white bg-opacity-10 p-4 rounded-md lg:col-span-2 max-h-80">
               <div className="h-[180px] lg:h-[215px] w-full">
@@ -164,7 +167,40 @@ const Page = ({ params }) => {
                     Ask for a Modification
                   </button>
                 </div>
-                <div className="mt-10">
+                <div className="flex items-start justify-start gap-5 mt-6 text-gray-300">
+                  {/* Tab Controls */}
+                  <p
+                    className={`cursor-pointer ${selectedTab === "Description" ? "text-red-600" : "hover:text-red-600"
+                      }`}
+                    onClick={() => setSelectedTab("Description")}
+                  >
+                    Description
+                  </p>
+                  <p
+                    className={`cursor-pointer ${selectedTab === "PurchasedUsers" ? "text-red-600" : "hover:text-red-600"
+                      }`}
+                    onClick={() => setSelectedTab("PurchasedUsers")}
+                  >
+                    Purchased users
+                  </p>
+                  <p
+                  className={`cursor-pointer ${
+                    selectedTab === "Analytics" ? "text-red-600" : "hover:text-red-600"
+                  }`}
+                  onClick={() => setSelectedTab("Analytics")}
+                >
+                  Analytics
+                </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {selectedTab === "Description" && (
+            <>
+              {/* Description section */}
+              <div>
+                <div className="mt-7">
                   <div>
                     <h3 className={`text-gray-200 font-bold text-lg uppercase ${Inria?.className} style={{ fontWeight: 700 }}`}>CONTENT</h3>
                   </div>
@@ -200,8 +236,12 @@ const Page = ({ params }) => {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </>
+          )} 
+          {selectedTab === "PurchasedUsers" && <TicketsByEvents id={id} />}
+          {selectedTab === "Analytics" && (
+            <TicketSalesAndRevenue eventId={id}></TicketSalesAndRevenue>
+          )}
         </div>
       </div>
 

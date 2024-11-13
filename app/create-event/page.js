@@ -371,7 +371,7 @@ const EventForm = () => {
             <div>
               <input
                 type="text"
-                placeholder="Event Name"
+                placeholder="Enter Event Name"
                 id="eventName"
                 name="eventName"
                 value={formData.eventName}
@@ -480,7 +480,7 @@ const EventForm = () => {
               <div onClick={() => handleOpenPopup("venue")} className="bg-white cursor-pointer bg-opacity-10 p-2 gap-2  rounded-md">
                 <div className="flex items-center gap-2 justify-start">
                   <MapPinIcon className="size-4 text-gray-300" />
-                  <p className="font-bold text-sm text-white">Add Description</p>
+                  <p className="font-bold text-sm text-white">Add Location</p>
                 </div>
                 <p>
                   {formData.venue
@@ -610,7 +610,7 @@ const EventForm = () => {
                     <p className="text-sm text-gray-300">
                       {formData?.dressCode
                         ? formData.dressCode.split(" ").slice(0, 7).join(" ") + (formData.dressCode.split(" ").length > 7 ? "..." : "")
-                        : "Keep it black if not needed"}
+                        : "Keep it blank if not needed"}
                     </p>
 
                     <PencilSquareIcon onClick={() => handleOpenPopup("dressCode")} className="cursor-pointer size-6 text-gray-300 mr-1" />
